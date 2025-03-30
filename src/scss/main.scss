@@ -1,0 +1,91 @@
+@import "variables";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: $mainFont;
+	color: $text;
+}
+
+body {
+	background-color: $background;
+}
+
+header {
+	background-color: $primary;
+	display: flex;
+	align-items: center;
+	padding: 5px 10px;
+
+	nav {
+		display: flex;
+		justify-content: end;
+		width: 100%;
+		padding-right: 20px;
+
+		a {
+			text-decoration: none;
+			padding: 0 10px;
+		}
+	}
+}
+
+main {
+	&#is404 {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 50px;
+
+		h1 {
+			font-size: 20rem;
+		}
+
+		p {
+			font-weight: bold;
+			font-size: 2rem;
+		}
+	}
+}
+
+footer {
+	background-color: $secondary-50;
+	margin: 20px 60px;
+	padding: 30px 70px;
+	border-radius: 35px;
+
+	.content {
+		display: grid;
+		grid-template-columns: repeat(3, auto);
+
+		.logo {
+			display: flex;
+			align-items: center;
+			height: fit-content;
+
+			h2 {
+				margin-left: 10px;
+			}
+		}
+
+		:not(.logo) {
+			display: flex;
+			flex-direction: column;
+			line-height: 30px;
+		}
+	}
+
+	h3 {
+		color: $text-600;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	hr {
+		border-top: 1px solid $secondary-200;
+		margin: 70px 0 20px;
+	}
+}
