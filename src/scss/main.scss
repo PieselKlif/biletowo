@@ -32,6 +32,8 @@ header {
 }
 
 main {
+	margin: 0 60px;
+
 	&#is404 {
 		display: flex;
 		flex-direction: column;
@@ -64,8 +66,9 @@ footer {
 			align-items: center;
 			height: fit-content;
 
-			h2 {
+			h1 {
 				margin-left: 10px;
+				font-size: 1.75rem;
 			}
 		}
 
@@ -76,12 +79,17 @@ footer {
 		}
 	}
 
-	h3 {
+	h4 {
 		color: $text-600;
+		font-size: 1.5rem;
 	}
 
 	a {
 		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
 	}
 
 	hr {
