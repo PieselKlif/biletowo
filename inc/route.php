@@ -1,6 +1,8 @@
 <?php
 if (!defined("ABSPATH")) die("Brak dostępu");
 
+$routes = [];
+
 function route(string $path, callable $callback) {
   global $routes;
   $routes[$path] = $callback;
