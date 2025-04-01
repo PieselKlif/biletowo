@@ -1,8 +1,6 @@
 <?php
 if (!defined("ABSPATH")) die("Brak dostępu");
 
-define('ROOT_DIR', $_SERVER['DOCUMENT_ROOT']);
-
 function get_header() {
 	require ROOT_DIR . "/views/header.php";
 }
