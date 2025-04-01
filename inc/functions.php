@@ -2,17 +2,17 @@
 if (!defined("ABSPATH")) die("Brak dostępu");
 
 function get_header() {
-	require ROOT_DIR . "/views/header.php";
+	require VIEWS_DIR . "/header.php";
 }
 
 function get_footer() {
-	require ROOT_DIR . "/views/footer.php";
+	require VIEWS_DIR . "/footer.php";
 }
 
 function home() {
-	require ROOT_DIR . "/views/home.php";
+	require VIEWS_DIR . "/home.php";
 }
 
 function is404() {
-	require ROOT_DIR . "/views/404.php";
+	require VIEWS_DIR . "/404.php";
 }

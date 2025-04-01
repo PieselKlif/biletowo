@@ -2,8 +2,11 @@
 if (!defined("ABSPATH")) die("Brak dostępu");
 
 define('ROOT_DIR', $_SERVER['DOCUMENT_ROOT']);
+define('VIEWS_DIR', $_SERVER['DOCUMENT_ROOT'] . "/views/");
+define('INC_DIR', $_SERVER['DOCUMENT_ROOT'] . "/inc/");
+define('CONFIG_DIR', $_SERVER['DOCUMENT_ROOT'] . "/config/");
 
-require __DIR__ . "/functions.php";
-require __DIR__ . "/route.php";
+require INC_DIR . "/functions.php";
+require INC_DIR . "/route.php";
 
-require ROOT_DIR . "/config/route-conf.php";
+require CONFIG_DIR . "/route-conf.php";
