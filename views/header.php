@@ -17,8 +17,8 @@ if (!defined("ABSPATH")) die("Brak dostępu");
 			<img src="/Logo.svg" alt="Logo">
 		</a>
 		<nav>
-			<a href="/Wydarzenia">Wydarzenia</a>
-			<a href="/Artysci">Artyści</a>
-			<a href="/Miejsca">Miejsca</a>
+			<a href="/wydarzenia">Wydarzenia</a>
+			<a href="/artysci">Artyści</a>
+			<a href="/miejsca">Miejsca</a>
 		</nav>
 	</header>
