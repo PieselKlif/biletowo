@@ -1,3 +1,7 @@
+<?php
+if (!defined("ABSPATH")) die("Brak dostępu");
+?>
+
 <main>
 	<section>
 		<h2>Polecane Wydarzenia</h2>

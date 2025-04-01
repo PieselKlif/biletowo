@@ -1,4 +1,5 @@
 <?php
+define("ABSPATH", true);
 require __DIR__ . "/inc/autoload.php";
 
 $routes = [];

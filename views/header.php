@@ -1,3 +1,7 @@
+<?php
+if (!defined("ABSPATH")) die("Brak dostępu");
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>

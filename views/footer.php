@@ -1,3 +1,7 @@
+<?php
+if (!defined("ABSPATH")) die("Brak dostępu");
+?>
+
 <footer>
 	<div class="content">
 		<div class="logo">
