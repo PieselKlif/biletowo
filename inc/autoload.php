@@ -8,5 +8,7 @@ define('CONFIG_DIR', $_SERVER['DOCUMENT_ROOT'] . "/config/");
 
 require INC_DIR . "/functions.php";
 require INC_DIR . "/route.php";
+require INC_DIR . "/database.php";
 
 require CONFIG_DIR . "/route-conf.php";
+require CONFIG_DIR . "/database-conf.php";

@@ -1,0 +1,28 @@
+<?php
+if (!defined("ABSPATH")) die("Brak dostępu");
+
+// CODE FROM https://github.com/litys/php-rose/blob/main/config/database.php
+// THX BROTHER
+
+class DB{
+	private static function connect(){
+		$host = DBConf::$host;
+		$db = DBConf::$db;
+		$user = DBConf::$user;
+		$password = DBConf::$password;
+
+		$pdo = new PDO('mysql:host='.$host.';dbname='.$db,$user,$password);
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+		return $pdo;
+	}
+
+	public static function query($query, $params = array()){
+		$stmt = self::connect()->prepare($query);
+		$stmt->execute($params);
+		if(explode(' ', $query)[0] == 'SELECT'){
+			$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+		}
+	}
+}
