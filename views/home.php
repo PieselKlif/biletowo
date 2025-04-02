@@ -4,13 +4,13 @@ if (!defined("ABSPATH")) die("Brak dostępu");
 
 <main>
 	<?php
-	$result = DB::query("SELECT `value`, `name` FROM `site_config` WHERE `name` IN ('baner_image', 'baner_url')");
+	$response = DB::query("SELECT `value`, `name` FROM `site_config` WHERE `name` IN ('baner_image', 'baner_url')");
 
 	$baner_image = "";
 	$baner_url = "";
 
-	if (!empty($result)) {
-		foreach ($result as $row) {
+	if (!empty($response)) {
+		foreach ($response as $row) {
 			if ($row['name'] == 'baner_image') {
 				$baner_image = $row['value'];
 			} elseif ($row['name'] == 'baner_url') {
@@ -21,7 +21,7 @@ if (!defined("ABSPATH")) die("Brak dostępu");
 
 	if (!empty($baner_image) && !empty($baner_url)) {
 		?>
-		<a href="<?= webConf::$wydarzenia . htmlspecialchars($baner_url); ?>">
+		<a class="banner" href="<?= webConf::$wydarzenia . htmlspecialchars($baner_url); ?>">
 			<img src="<?= webConf::$uploadDir . htmlspecialchars($baner_image); ?>" alt="Baner">
 		</a>
 		<?php
@@ -30,11 +30,22 @@ if (!defined("ABSPATH")) die("Brak dostępu");
 
 	<section>
 		<h2>Polecane Wydarzenia</h2>
+		<div>
+
+		</div>
 	</section>
 	<section>
 		<h2>Polecane Artyści</h2>
+		<div>
+			<?php
+				get_artist(6);
+			?>
+		</div>
 	</section>
 	<section>
 		<h2>Polecane Miejsca</h2>
+		<div>
+			
+		</div>
 	</section>
 </main>
