@@ -37,9 +37,7 @@ if (!defined("ABSPATH")) die("Brak dostępu");
 	<section>
 		<h2>Polecane Artyści</h2>
 		<div>
-			<?php
-				get_artist(6);
-			?>
+			<?php get_artist(6); ?>
 		</div>
 	</section>
 	<section>
