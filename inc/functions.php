@@ -52,3 +52,13 @@ function get_venues($amount = 0) {
 		}
 	}
 }
+
+function get_page($name) {
+	require VIEWS_DIR . "page.php";
+
+	$response = DB::query("SELECT * FROM `site_config` WHERE `name` = :n", ['n' => $name]);
+
+	if (!empty($response)) {
+		page($response[0]['value']);
+	}
+}
