@@ -21,8 +21,8 @@ if (!defined("ABSPATH")) die("Brak dostępu");
 
 	if (!empty($baner_image) && !empty($baner_url)) {
 		?>
-		<a class="banner" href="<?= webConf::$wydarzenia . htmlspecialchars($baner_url); ?>">
-			<img src="<?= webConf::$uploadDir . htmlspecialchars($baner_image); ?>" alt="Baner">
+		<a class="banner" href="<?= WebConf::$wydarzenia . htmlspecialchars($baner_url); ?>">
+			<img src="<?= WebConf::$uploadDir . htmlspecialchars($baner_image); ?>" alt="Baner">
 		</a>
 		<?php
 	}
