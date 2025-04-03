@@ -56,6 +56,58 @@ main {
 		}
 	}
 
+	.venues {
+		width: fit-content;
+		width: 250px;
+		border-radius: 35px 35px 15px 15px;
+		text-decoration: none;
+		background-color: $accent-300;
+		padding-bottom: 15px;
+
+		transition: transform 0.3s ease;
+
+		&:hover {
+			transform: scale(1.05);
+		}
+
+		div {
+			width: 250px;
+			height: 150px;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: cover;
+			border-radius: 35px 35px 0 0;
+		}
+		
+		p {
+			margin-top: 10px;
+			margin-left: 15px;
+			
+			&:nth-child(2) {
+				font-size: 1.1rem;
+				font-weight: bold;
+			}
+
+			&:nth-child(3) {
+				font-size: 1rem;
+				color: $text-900;
+				font-style: italic;
+			}
+		}
+
+		&:not(:first-child):not(:last-child) {
+			margin: 0 10px 0;
+		}
+
+		&:first-child {
+			margin-right: 10px;
+		}
+
+		&:last-child {
+			margin-left: 10px;
+		}
+	}
+
 	.artist {
 		width: fit-content;
 		display: flex;

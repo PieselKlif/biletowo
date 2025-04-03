@@ -34,3 +34,21 @@ function get_artist($amount = 0) {
 		}
 	}
 }
+
+function get_venues($amount = 0) {
+	require VIEWS_DIR . "venues.php";
+
+	if ($amount == 0){
+		$query = "SELECT * FROM `venues` ORDER BY `id` DESC";
+	} else {
+		$query = "SELECT * FROM `venues` ORDER BY `id` DESC LIMIT $amount";
+	}
+
+	$response = DB::query($query);
+
+	if (!empty($response)) {
+		foreach ($response as $row) {
+			venues($row['slug'], $row['image'], $row['name'], $row['city']);
+		}
+	}
+}

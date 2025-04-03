@@ -5,4 +5,5 @@ class WebConf {
 	public static $uploadDir = '/media/upload/';
 	public static $wydarzenia = '/wydarzenia/';
 	public static $artysci = '/artysci/';
+	public static $miejsca = '/miejsca/';
 }

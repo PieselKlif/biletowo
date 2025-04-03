@@ -43,7 +43,7 @@ if (!defined("ABSPATH")) die("Brak dostępu");
 	<section>
 		<h2>Polecane Miejsca</h2>
 		<div>
-			
+			<?php get_venues(4); ?>
 		</div>
 	</section>
 </main>
