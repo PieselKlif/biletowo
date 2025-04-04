@@ -9,12 +9,12 @@ if (!defined("ABSPATH")) die("Brak dostępu");
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Biletowo</title>
 	<link rel="stylesheet" href="/src/css/main.min.css">
-	<link rel="shortcut icon" href="biletowo-export.svg" type="image/x-icon">
+	<link rel="shortcut icon" href="/media/biletowo-export.svg" type="image/x-icon">
 </head>
 <body>
 	<header>
 		<a href="/">
-			<img src="/Logo.svg" alt="Logo">
+			<img src="/media/Logo.svg" alt="Logo">
 		</a>
 		<nav>
 			<a href="/wydarzenia">Wydarzenia</a>

@@ -5,7 +5,7 @@ if (!defined("ABSPATH")) die("Brak dostępu");
 <footer>
 	<div class="content">
 		<div class="logo">
-			<img src="/Logo.svg" alt="Logo">
+			<img src="/media/Logo.svg" alt="Logo">
 			<h1>BILETOWO</h1>
 		</div>
 		<div>
