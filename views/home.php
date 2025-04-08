@@ -31,19 +31,18 @@ if (!defined("ABSPATH")) die("Brak dostępu");
 	<section>
 		<h2>Polecane Wydarzenia</h2>
 		<div>
-
 		</div>
 	</section>
 	<section>
 		<h2>Polecane Artyści</h2>
 		<div>
-			<?php echo get_artist(6); ?>
+			<?= get_artist(6); ?>
 		</div>
 	</section>
 	<section>
 		<h2>Polecane Miejsca</h2>
 		<div>
-			<?php echo get_venues(4); ?>
+			<?= get_venues(4); ?>
 		</div>
 	</section>
 </main>
