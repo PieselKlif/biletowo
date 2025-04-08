@@ -56,6 +56,10 @@ main {
 		}
 	}
 
+	div:has(> .artist), div:has(> .venues) {
+		gap: 20px;
+	}
+
 	.venues {
 		width: fit-content;
 		width: 250px;
@@ -94,18 +98,6 @@ main {
 				font-style: italic;
 			}
 		}
-
-		&:not(:first-child):not(:last-child) {
-			margin: 0 10px 0;
-		}
-
-		&:first-child {
-			margin-right: 10px;
-		}
-
-		&:last-child {
-			margin-left: 10px;
-		}
 	}
 
 	.artist {
@@ -135,18 +127,6 @@ main {
 		p {
 			font-size: 1.1rem;
 			margin-top: 10px;
-		}
-
-		&:not(:first-child):not(:last-child) {
-			margin: 0 10px 0;
-		}
-
-		&:first-child {
-			margin-right: 10px;
-		}
-
-		&:last-child {
-			margin-left: 10px;
 		}
 	}
 

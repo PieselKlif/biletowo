@@ -20,6 +20,8 @@ function is404() {
 function get_artist($amount = 0) {
 	require VIEWS_DIR . "artist.php";
 
+	ob_start();
+
 	if ($amount == 0){
 		$query = "SELECT * FROM `artists` ORDER BY `id` DESC";
 	} else {
@@ -33,10 +35,14 @@ function get_artist($amount = 0) {
 			artist($row['slug'], $row['image'], $row['name']);
 		}
 	}
+
+	return ob_get_clean();
 }
 
 function get_venues($amount = 0) {
 	require VIEWS_DIR . "venues.php";
+
+	ob_start();
 
 	if ($amount == 0){
 		$query = "SELECT * FROM `venues` ORDER BY `id` DESC";
@@ -51,6 +57,8 @@ function get_venues($amount = 0) {
 			venues($row['slug'], $row['image'], $row['name'], $row['city']);
 		}
 	}
+
+	return ob_get_clean();
 }
 
 function get_page($name) {
