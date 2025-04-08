@@ -43,4 +43,12 @@ route('/wsparcie-klienta', function () {
   get_page('wsparcie-klienta_content');
 });
 
+route('/artysci', function () {
+  category("Artyści", get_artist());
+});
+
+route('/miejsca', function () {
+  category("Miejsca", get_venues());
+});
+
 // ---- END PAGE ROUTE ----

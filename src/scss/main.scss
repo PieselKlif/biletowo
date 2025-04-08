@@ -160,6 +160,26 @@ main {
 			margin-top: 25px;
 		}
 	}
+
+	&#category {
+		h2 {
+			text-align: center;
+			margin: 20px;
+			font-size: 2rem;
+		}
+
+		.content {
+			div {
+				flex-wrap: wrap;
+
+				gap: 20px;
+
+				a {
+					margin-bottom: 10px;
+				}
+			}
+		}
+	}
 }
 
 footer {
