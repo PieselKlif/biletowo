@@ -61,6 +61,28 @@ function get_venues($amount = 0) {
 	return ob_get_clean();
 }
 
+function get_event($amount = 0) {
+	require VIEWS_DIR . "event.php";
+
+	ob_start();
+
+	if ($amount == 0){
+		$query = "SELECT e.name, e.slug, e.image, e.event_time, v.name AS venue_name, v.city, a.name AS artist_name FROM events e JOIN venues v ON e.venue_id = v.id JOIN artists a ON e.artist_id = a.id ORDER BY e.id DESC";
+	} else {
+		$query = "SELECT e.name, e.slug, e.image, e.event_time, v.name AS venue_name, v.city, a.name AS artist_name FROM events e JOIN venues v ON e.venue_id = v.id JOIN artists a ON e.artist_id = a.id ORDER BY e.id DESC LIMIT $amount";
+	}
+
+	$response = DB::query($query);
+
+	if (!empty($response)) {
+		foreach ($response as $row) {
+			event($row['slug'], $row['image'], $row['name'], $row['artist_name'], $row['event_time'], $row['venue_name'] . ", " . $row['city']);
+		}
+	}
+
+	return ob_get_clean();
+}
+
 function get_page($name) {
 	require VIEWS_DIR . "page.php";
 

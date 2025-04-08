@@ -31,6 +31,7 @@ if (!defined("ABSPATH")) die("Brak dostępu");
 	<section>
 		<h2>Polecane Wydarzenia</h2>
 		<div>
+			<?= get_event(4); ?>
 		</div>
 	</section>
 	<section>

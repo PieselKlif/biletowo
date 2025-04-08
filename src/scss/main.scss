@@ -56,7 +56,7 @@ main {
 		}
 	}
 
-	div:has(> .artist), div:has(> .venues) {
+	div:has(> .artist), div:has(> .venues), div:has(> .event) {
 		gap: 20px;
 	}
 
@@ -94,6 +94,58 @@ main {
 
 			&:nth-child(3) {
 				font-size: 1rem;
+				color: $text-900;
+				font-style: italic;
+			}
+		}
+	}
+
+	.event {
+		width: fit-content;
+		width: 250px;
+		border-radius: 35px 35px 15px 15px;
+		text-decoration: none;
+		background-color: $accent-300;
+		padding-bottom: 15px;
+
+		transition: transform 0.3s ease;
+
+		&:hover {
+			transform: scale(1.05);
+		}
+
+		div {
+			width: 250px;
+			height: 200px;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: cover;
+			border-radius: 35px 35px 0 0;
+		}
+		
+		p {
+			margin-top: 10px;
+			margin-left: 15px;
+			
+			&:nth-child(2) {
+				font-size: 1.25rem;
+				font-weight: bold;
+			}
+
+			&:nth-child(3) {
+				font-size: 0.95rem;
+				color: $text-900;
+				font-style: italic;
+				font-weight: 600;
+				margin-top: 2px;
+			}
+
+			&:nth-child(4) {
+				font-size: 0.95rem;
+			}
+
+			&:nth-child(5) {
+				font-size: 0.75rem;
 				color: $text-900;
 				font-style: italic;
 			}

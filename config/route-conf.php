@@ -51,4 +51,8 @@ route('/miejsca', function () {
   category("Miejsca", get_venues());
 });
 
+route('/wydarzenia', function () {
+  category("Wydarzenia", get_event());
+});
+
 // ---- END PAGE ROUTE ----
