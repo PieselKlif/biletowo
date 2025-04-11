@@ -47,8 +47,17 @@ route('/artysci', function () {
   category("Artyści", get_artist());
 });
 
+route('/artysci/:slug', function ($slug) {
+  get_event_by_artist($slug);
+});
+
+
 route('/miejsca', function () {
   category("Miejsca", get_venues());
+});
+
+route('/miejsca/:slug', function ($slug) {
+  get_event_by_venues($slug);
 });
 
 route('/wydarzenia', function () {

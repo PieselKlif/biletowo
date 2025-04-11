@@ -3,24 +3,36 @@ if (!defined("ABSPATH")) die("Brak dostępu");
 
 $routes = [];
 
-function route(string $path, callable $callback) {
+function route(string $pattern, callable $callback) {
   global $routes;
-  $routes[$path] = $callback;
+  $routes[] = ['pattern' => $pattern, 'callback' => $callback];
 }
 
 function run_route() {
   global $routes;
-  $uri = $_SERVER['REQUEST_URI'];
+  $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
   $found = false;
-  foreach ($routes as $path => $callback) {
-    if ($path !== $uri) continue;
 
-    $found = true;
-    $callback();
+  foreach ($routes as $route) {
+    $pattern = trim($route['pattern'], '/');
+    $callback = $route['callback'];
+
+    $regex = preg_replace('#:([\w]+)#', '([^/]+)', $pattern);
+    if (preg_match('#^' . $regex . '$#', $uri, $matches)) {
+      array_shift($matches);
+      $found = true;
+      $callback(...$matches);
+      break;
+    }
   }
 
   if (!$found) {
-    $notFoundCallback = $routes['/404'];
-    $notFoundCallback();
+    foreach ($routes as $route) {
+      if ($route['pattern'] === '/404') {
+        $route['callback']();
+        return;
+      }
+    }
+    echo "404 Not Found";
   }
 }
