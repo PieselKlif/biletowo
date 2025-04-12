@@ -5,6 +5,10 @@ function toggleSidebar() {
 const dir = "/admin/pages/";
 
 function loadSite(site) {
+	document.querySelector("main").classList = "";
+	document.querySelector("main").classList.add(site);
+	document.querySelector("main").innerHTML = "Ładowanie zawartości...";
+
 	fetch(`${dir}${site}.php`)
 		.then((res) => res.text())
 		.then((content => {
@@ -23,3 +27,8 @@ document.querySelectorAll("li a").forEach((element) => {
 		loadSite(element.getAttribute("data-target"));
 	});
 });
+
+function removeImg(name) {
+	fetch(`removeimg.php?name=${name}`)
+	location.reload();
+}

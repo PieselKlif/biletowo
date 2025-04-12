@@ -27,13 +27,18 @@ if (!isset($_SESSION['login'])) {
 				</a>
 			</li>
 			<li>
-				<a data-target="test">
-					<ion-icon name="home-outline"></ion-icon> <span>Test</span>
+				<a data-target="media">
+				<ion-icon name="images-outline"></ion-icon> <span>Media</span>
 				</a>
 			</li>
 			<li>
 				<a data-target="test2">
 					<ion-icon name="home-outline"></ion-icon> <span>Test2</span>
+				</a>
+			</li>
+			<li>
+				<a href="/admin/logout.php">
+					<ion-icon name="log-out-outline"></ion-icon> <span>Wyloguj</span>
 				</a>
 			</li>
     </ul>
