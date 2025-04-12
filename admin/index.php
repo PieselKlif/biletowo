@@ -9,7 +9,7 @@ if(isset($_SESSION['login'])){ header("Location: /admin/home.php"); exit(); }
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Biletowo - Admin</title>
-	<link rel="stylesheet" href="/src/css/admin.min.css">
+	<link rel="stylesheet" href="/src/css/admin-login.min.css">
 </head>
 <body>
 	<form action="/admin/login.php" method="post">

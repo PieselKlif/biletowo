@@ -2,50 +2,93 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
+	background-color: #232329;
+	display: flex;
+	font-family: Arial, sans-serif;
+}
+
+main {
+	margin-left: 70px;
+	color: white;
+}
+
+.sidebar {
+	width: 200px;
+	background: #2c2e35;
+	box-shadow: #11181f81 0 0 20px 10px;
 	height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
+	overflow: hidden;
+	transition: width 0.2s, box-shadow 0.2s;
+	position: absolute;
 
-form {
-	display: flex;
-	flex-direction: column;
-
-	box-shadow: rgba(146, 146, 146, 0.322) 0 0 20px 10px;
-	padding: 20px 10px;
-	border-radius: 10px;
-
-	label {
-		margin: 7px 0 4px;
-
-		&:nth-child(3) {
-			margin-top: 15px;
-		}
-	}
-
-	input:not([type=submit]) {
-		border: 1px solid rgb(109, 107, 216);
-		border-radius: 5px;
-		padding: 4px 6px;
-	}
-
-	input[type=submit] {
-		margin-top: 15px;
-		padding: 5px;
-		background-color: rgb(159, 157, 248);
-		border: rgb(109, 107, 216) 2px solid;
-		border-radius: 10px;
+	.toggle-btn {
+		display: flex;
+		justify-content: center;
+		background: #179b80;
+		padding: 10px;
+		user-select: none;
 		cursor: pointer;
+		transition: background 0.2s;
 
-		transition: 0.2s background-color;
-		
 		&:hover {
-			background-color: rgb(109, 107, 216);
+			background: #1bb496;
+		}
+	}
+
+	ul {
+		list-style: none;
+
+		li {
+			.active {
+				background: #32b28a !important;
+			}
+
+			a {
+				cursor: pointer;
+				padding: 10px 0;
+				display: flex;
+				align-items: center;
+				color: white;
+				text-decoration: none;
+				font-size: 1.2rem;
+
+				transition: 0.15s background;
+	
+				&:hover {
+					background: #25262c;
+				}
+
+				ion-icon {
+					font-size: 1.5rem;
+					width: 60px;
+					flex-shrink: 0;
+				}
+
+				span {
+					opacity: 1;
+					transition: opacity 0.3s ease;
+				}
+			}
+		}
+	}
+
+	&.collapsed {
+		width: 60px;
+		box-shadow: none;
+
+		ul {
+			li {
+				a {
+					span {
+						opacity: 0;
+						transition: opacity 0.3s ease;
+					}
+				}
+			}
 		}
 	}
 }
+
