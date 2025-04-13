@@ -10,8 +10,8 @@ $files = array_diff(scandir($path), array('.', '..'));
 ?>
 
 <form action="upload.php" method="post" enctype="multipart/form-data">
-	<label>Wybierz obraz do przesłania:</label>
-	<input type="file" name="image" accept="image/*" required>
+	<label for="image">Wybierz obraz do przesłania:</label>
+	<input type="file" id="image" name="image" accept="image/*" required>
 	<input type="submit" value="Prześlij obraz">
 </form>
 
@@ -22,7 +22,7 @@ $files = array_diff(scandir($path), array('.', '..'));
 		<section>
 			<img src="/media/upload/<?= $img ?>">
 			<p><?= $img ?></p>
-			<button onclick="removeImg('<?= $img ?>')">Usuń zdjęcie</button>
+			<button type="button" onclick="removeImg('<?= $img ?>')">Usuń zdjęcie</button>
 		</section>
 		<?php
 	}

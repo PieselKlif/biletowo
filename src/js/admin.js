@@ -1,8 +1,10 @@
+const dir = "/admin/pages/";
+
+let site = "home";
+
 function toggleSidebar() {
 	document.querySelector('.sidebar').classList.toggle('collapsed');
 }
-
-const dir = "/admin/pages/";
 
 function loadSite(site) {
 	document.querySelector("main").classList = "";
@@ -16,7 +18,7 @@ function loadSite(site) {
 		}));
 }
 
-loadSite("home");
+loadSite(site);
 
 document.querySelectorAll("li a").forEach((element) => {
 	element.addEventListener("click", (e) => {
@@ -24,7 +26,8 @@ document.querySelectorAll("li a").forEach((element) => {
 
 		element.classList.add("active");
 
-		loadSite(element.getAttribute("data-target"));
+		site = element.getAttribute("data-target");
+		loadSite(site);
 	});
 });
 
