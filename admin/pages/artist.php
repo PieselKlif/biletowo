@@ -39,7 +39,7 @@ require $_SERVER['DOCUMENT_ROOT'] . "/inc/autoload.php";
 			<td><?= $row['name'] ?></td>
 			<td><?= $row['image'] ?></td>
 			<td><?= $row['slug'] ?></td>
-			<td><button onclick="removeArtist(<?= $row['id'] ?>)">Usuń</button></td>
+			<td><button onclick="removeArtist(<?= $row['id'] ?>)" class="remove">Usuń</button></td>
 		</tr>
 		<?php
 	}
