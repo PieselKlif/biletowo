@@ -33,7 +33,7 @@ document.querySelectorAll("li a").forEach((element) => {
 
 function removeImg(name) {
 	fetch(`/admin/api/removeimg.php?name=${name}`)
-	location.reload();
+		.then(loadSite(site));
 }
 
 function addArtist() {
