@@ -28,12 +28,12 @@ if (!isset($_SESSION['login'])) {
 			</li>
 			<li>
 				<a data-target="media">
-				<ion-icon name="images-outline"></ion-icon> <span>Media</span>
+					<ion-icon name="images-outline"></ion-icon> <span>Media</span>
 				</a>
 			</li>
 			<li>
-				<a data-target="test2">
-					<ion-icon name="home-outline"></ion-icon> <span>Test2</span>
+				<a data-target="artist">
+					<ion-icon name="person-outline"></ion-icon> <span>Artyści</span>
 				</a>
 			</li>
 			<li>

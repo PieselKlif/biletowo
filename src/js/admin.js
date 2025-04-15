@@ -32,6 +32,20 @@ document.querySelectorAll("li a").forEach((element) => {
 });
 
 function removeImg(name) {
-	fetch(`removeimg.php?name=${name}`)
+	fetch(`/admin/api/removeimg.php?name=${name}`)
 	location.reload();
+}
+
+function addArtist() {
+	const name = document.getElementById("name").value;
+	const image = document.getElementById("image").value;
+	const slug = document.getElementById("slug").value;
+
+	fetch(`/admin/api/addArtist.php?name=${name}&image=${image}&slug=${slug}`)
+		.then(loadSite(site));
+}
+
+function removeArtist(id) {
+	fetch(`/admin/api/removeArtist.php?id=${id}`)
+		.then(loadSite(site));
 }
