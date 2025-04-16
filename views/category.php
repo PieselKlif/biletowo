@@ -1,4 +1,5 @@
 <?php
+if (!defined("ABSPATH")) die("Brak dostępu");
 function category($name, $content) {
 	?>
 	<main id="category">
