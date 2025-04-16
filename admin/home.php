@@ -37,6 +37,11 @@ if (!isset($_SESSION['login'])) {
 				</a>
 			</li>
 			<li>
+				<a data-target="venues">
+					<ion-icon name="location-outline"></ion-icon> <span>Miejsca</span>
+				</a>
+			</li>
+			<li>
 				<a href="/admin/logout.php">
 					<ion-icon name="log-out-outline"></ion-icon> <span>Wyloguj</span>
 				</a>

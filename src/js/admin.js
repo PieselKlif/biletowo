@@ -49,3 +49,17 @@ function removeArtist(id) {
 	fetch(`/admin/api/removeArtist.php?id=${id}`)
 		.then(loadSite(site));
 }
+
+function addVenue() {
+	const name = document.getElementById("name").value;
+	const image = document.getElementById("image").value;
+	const slug = document.getElementById("slug").value;
+
+	fetch(`/admin/api/addVenue.php?name=${name}&image=${image}&slug=${slug}`)
+		.then(loadSite(site));
+}
+
+function removeVenue(id) {
+	fetch(`/admin/api/removeVenue.php?id=${id}`)
+		.then(loadSite(site));
+}
