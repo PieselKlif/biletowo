@@ -51,7 +51,6 @@ route('/artysci/:slug', function ($slug) {
   get_event_by_artist($slug);
 });
 
-
 route('/miejsca', function () {
   category("Miejsca", get_venues());
 });
@@ -62,6 +61,10 @@ route('/miejsca/:slug', function ($slug) {
 
 route('/wydarzenia', function () {
   category("Wydarzenia", get_event());
+});
+
+route('/wydarzenia/:slug', function ($slug) {
+  get_event_site($slug);
 });
 
 // ---- END PAGE ROUTE ----

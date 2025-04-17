@@ -232,6 +232,79 @@ main {
 			}
 		}
 	}
+
+	&#event_page {
+		.head {
+			margin: 20px 0;
+			display: grid;
+			grid-template-columns: 45vw auto;
+
+			img {
+				width: 45vw;
+				border-radius: 40px;
+			}
+
+			div {
+				margin-left: 20px;
+				display: flex;
+				flex-direction: column;
+				
+				h1 {
+					font-size: 2.5rem;
+				}
+
+				h2 {
+					color: $text-600;
+					font-style: italic;
+				}
+
+				h3 {
+					margin-top: 15px;
+					font-size: 1.3rem;
+				}
+
+				h4 {
+					font-weight: normal;
+				}
+
+				h5 {
+					font-weight: normal;
+					font-size: 1.1rem;
+					margin-top: 15px;
+					line-height: 1.5rem;
+				}
+
+				h6 {
+					font-size: 2rem;
+					font-weight: normal;
+					margin-top: 25px;
+				}
+				
+				div {
+					display: flex;
+					justify-content: end;
+					height: 100%;
+					margin-top: 20px;
+
+					a {
+						background-color: $primary;
+						text-decoration: none;
+						align-self: center;
+						padding: 10px 80px;
+						border-radius: 10px;
+						font-size: 1.4rem;
+					}
+				}
+			}
+		}
+
+		p {
+			font-size: 1.1rem;
+			line-height: 1.8rem;
+			letter-spacing: 0.06rem;
+			margin-bottom: 0.5rem;
+		}
+	}
 }
 
 footer {

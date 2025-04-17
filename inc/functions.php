@@ -138,3 +138,63 @@ function get_page($name) {
 		page($response[0]['value']);
 	}
 }
+
+function get_event_site($slug){
+	$res = DB::query("SELECT e.id, e.name, e.image, e.description, e.event_time_info, e.event_time, v.name AS venue_name, v.city, a.name AS artist_name FROM events e JOIN venues v ON e.venue_id = v.id JOIN artists a ON e.artist_id = a.id WHERE e.slug = :s", ["s" => $slug]);
+	
+	if (!empty($res)) {
+		require VIEWS_DIR . "event_page.php";
+		
+		$row = $res[0];
+		
+		$id = $row['id'];
+		$img = $row['image'];
+		$name = $row['name'];
+		$desc = $row['description'];
+		$event_time_info = $row['event_time_info'];
+		$event_time = $row['event_time'];
+		$venue_name = $row['venue_name'];
+		$city = $row['city'];
+		$artist_name = $row['artist_name'];
+
+		$date = dateFormat(explode(" ", $event_time)[0]);
+
+		$res = DB::query("SELECT MIN(price) AS lowest_price FROM ticket_prices WHERE event_id = :i;", ["i" => $id]);
+
+		$lowest_price = $res[0]['lowest_price'];
+
+		$location = $venue_name . ", " . $city;
+		get_event_page($img, $name, $artist_name, $date, $location, $event_time_info, $desc, $lowest_price, $slug);
+	} else {
+		is404();
+	}
+}
+
+function dateFormat($data) {
+	$months = [
+		'01' => 'stycznia',
+		'02' => 'lutego',
+		'03' => 'marca',
+		'04' => 'kwietnia',
+		'05' => 'maja',
+		'06' => 'czerwca',
+		'07' => 'lipca',
+		'08' => 'sierpnia',
+		'09' => 'września',
+		'10' => 'października',
+		'11' => 'listopada',
+		'12' => 'grudnia'
+	];
+
+	$dataObj = DateTime::createFromFormat('d.m.Y', $data);
+	
+	if (!$dataObj) {
+		return 'Niepoprawny format daty';
+	}
+
+	$d = $dataObj->format('d');
+	$m = $dataObj->format('m');
+	$y = $dataObj->format('Y');
+
+	return intval($d) . ' ' . $months[$m] . ' ' . $y;
+}
