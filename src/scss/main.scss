@@ -202,8 +202,12 @@ main {
 		margin-top: 20px;
 		margin-bottom: 50px;
 		line-height: 1.5rem;
-		letter-spacing: 0.07rem;
+		letter-spacing: 0.05rem;
 		font-size: 1.05rem;
+
+		p {
+			margin-bottom: 10px;
+		}
 
 		li {
 			margin-left: 20px;
