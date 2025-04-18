@@ -67,4 +67,8 @@ route('/wydarzenia/:slug', function ($slug) {
   get_event_site($slug);
 });
 
+route('/wydarzenia/:slug/buy', function ($slug) {
+  get_buy_page($slug);
+});
+
 // ---- END PAGE ROUTE ----

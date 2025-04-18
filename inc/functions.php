@@ -198,3 +198,18 @@ function dateFormat($data) {
 
 	return intval($d) . ' ' . $months[$m] . ' ' . $y;
 }
+
+function get_buy_page($slug) {
+	$eres = DB::query("SELECT * FROM events WHERE slug = :s;", ["s" => $slug]);
+	
+	if (!empty($eres)){
+		require VIEWS_DIR . "buy_event.php";
+		$vres = DB::query("SELECT * FROM venues WHERE id = :i;", ["i" => $eres[0]['venue_id']]);
+		$ares = DB::query("SELECT * FROM artists WHERE id = :i;", ["i" => $eres[0]['artist_id']]);
+
+		get_buy_site($eres[0], $vres[0], $ares[0]);
+	} else {
+		is404();
+	}
+
+}

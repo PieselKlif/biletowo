@@ -198,6 +198,19 @@ main {
 		}
 	}
 
+	&#buy {
+		div {
+			display: grid;
+			grid-template-columns: auto auto;
+
+			.col1 {
+				img {
+					width: 50vw;
+				}
+			}
+		}
+	}
+
 	&#page {
 		margin-top: 20px;
 		margin-bottom: 50px;
