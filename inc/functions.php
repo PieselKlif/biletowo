@@ -207,7 +207,9 @@ function get_buy_page($slug) {
 		$vres = DB::query("SELECT * FROM venues WHERE id = :i;", ["i" => $eres[0]['venue_id']]);
 		$ares = DB::query("SELECT * FROM artists WHERE id = :i;", ["i" => $eres[0]['artist_id']]);
 
-		get_buy_site($eres[0], $vres[0], $ares[0]);
+		$date = dateFormat(explode(" ", $eres[0]['event_time'])[0]);
+
+		get_buy_site($eres[0], $vres[0], $ares[0], $date);
 	} else {
 		is404();
 	}

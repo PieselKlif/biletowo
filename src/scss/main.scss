@@ -207,13 +207,69 @@ main {
 	}
 
 	&#buy {
+		.he {
+			font-size: 2rem;
+			font-weight: bold;
+			margin: 20px 0 10px;
+		}
+
 		div {
 			display: grid;
 			grid-template-columns: auto auto;
 
 			.col1 {
+				display: flex;
+				flex-direction: column;
+
 				img {
 					width: 50vw;
+				}
+			}
+
+			.col2 {
+				margin-left: 20px;
+
+				div {
+					height: fit-content;
+					background-color: $secondary-50;
+					border-radius: 25px 25px 15px 15px;
+					
+					display: flex;
+					flex-direction: column;
+					
+					img {
+						border-radius: 25px 25px 0 0;
+						width: 100%;
+					}
+
+					div {
+						margin: 10px 20px;
+
+						h1 {
+							font-size: 2.1rem;
+						}
+		
+						h2 {
+							color: $text-600;
+							font-style: italic;
+							font-size: 1.3rem;
+						}
+		
+						h3 {
+							margin-top: 15px;
+							font-size: 1.1rem;
+						}
+		
+						h4 {
+							font-weight: normal;
+						}
+		
+						h5 {
+							font-weight: normal;
+							margin-top: 15px;
+							line-height: 1.5rem;
+						}
+					}
 				}
 			}
 		}
