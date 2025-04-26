@@ -1,5 +1,6 @@
 {
     "name": "pieselklif/biletowo",
+    "type": "project",
     "license": "AGPL-3.0",
     "autoload": {
         "psr-4": {
