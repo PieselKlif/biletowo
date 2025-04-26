@@ -213,5 +213,4 @@ function get_buy_page($slug) {
 	} else {
 		is404();
 	}
-
 }

@@ -4,9 +4,26 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 	?>
 	<main id="buy">
 		<p class="he">1. Wybór biletów</p>
-		<div>
+		<div class="main">
 			<div class="col1">
 				<img src="<?= WebConf::$uploadDir . $vrow['venue_map'] ?>" alt="Plan obiektu">
+				<div class="tickets_panel">
+					<label for="event-date">Wybierz datę:</label>
+					<select id="event-date"></select>
+					
+					<label for="event-time">Wybierz godzinę:</label>
+					<select id="event-time"></select>
+					<?php
+					$res = DB::query("SELECT * FROM ticket_prices WHERE event_id = :i AND sector_id IS NULL", ["i" => $erow['id']]);
+					foreach($res as $row){
+						?>
+							<div class="panel">
+								<p><?= $row['display_name'] ?></p>
+							</div>
+						<?php
+					}
+				?>
+				</div>
 			</div>
 			<div class="col2">
 				<div>
@@ -21,6 +38,10 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 				</div>
 			</div>
 		</div>
+		<script>
+			eid = <?= $erow['id'] ?>;
+		</script>
+		<script src="/src/js/buy.js"></script>
 	</main>
 	<?php
 }

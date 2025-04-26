@@ -213,7 +213,7 @@ main {
 			margin: 20px 0 10px;
 		}
 
-		div {
+		.main {
 			display: grid;
 			grid-template-columns: auto auto;
 
@@ -223,6 +223,25 @@ main {
 
 				img {
 					width: 50vw;
+					border-radius: 10px;
+				}
+
+				.tickets_panel {
+					margin-top: 10px;
+
+					select {
+            padding: 8px;
+            border: 1px solid $secondary-200;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            background: white;
+            color: $text;
+        	}
+
+					label:nth-child(3) {
+						margin-left: 20px;
+					}
 				}
 			}
 

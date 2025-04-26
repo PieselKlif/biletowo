@@ -11,6 +11,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 require INC_DIR . "/functions.php";
 require INC_DIR . "/route.php";
 require INC_DIR . "/database.php";
+require INC_DIR . "/api-functions.php";
 
 require CONFIG_DIR . "/route-conf.php";
 require CONFIG_DIR . "/database-conf.php";

@@ -72,3 +72,11 @@ route('/wydarzenia/:slug/buy', function ($slug) {
 });
 
 // ---- END PAGE ROUTE ----
+
+// ---- START API ----
+
+route('/api/event/:id/time', function ($id) {
+  get_event_time($id);
+});
+
+// ---- END API ----
