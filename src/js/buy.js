@@ -1,6 +1,11 @@
 const eventDate = document.getElementById("event-date");
 const eventTime = document.getElementById("event-time");
 
+const ticket = {
+	'tickets': [],
+	'seats': []
+};
+
 function updateTime(selectedEvent) {
 	eventTime.innerHTML = "";
 	if (selectedEvent) {
@@ -47,3 +52,68 @@ fetch(`/api/event/${eid}/time`)
 	.catch(error => {
 		console.error('Błąd:', error.message);
 	});
+
+fetch(`http://localhost:3000/api/event/${eid}/tickets`)
+	.then(response => {
+		if (!response.ok) {
+			return response.json().then(errorData => {
+					throw new Error(errorData.error);
+			});
+		}
+		return response.json();
+	})
+	.then(data => {
+		data.tickets.forEach(element => {
+			const tic = {"id": element.id, "quantity": 0};
+
+			ticket.tickets.push(tic);
+
+			const mainDiv = document.createElement("div");
+			const name = document.createElement("h2");
+			const sDiv = document.createElement("div");
+			const price = document.createElement("h3");
+			const minus = document.createElement("span");
+			const num = document.createElement("span");
+			const add = document.createElement("span");
+
+			mainDiv.classList.add("ticket");
+			minus.classList.add("minus");
+			num.classList.add("num");
+			add.classList.add("add");
+			name.innerText = element.name;
+			price.innerText = `${element.price} zł`;
+			minus.innerText = "-";
+			num.innerText = "0";
+			add.innerText = "+";
+			sDiv.appendChild(price);
+			sDiv.appendChild(minus);
+			sDiv.appendChild(num);
+			sDiv.appendChild(add);
+			mainDiv.appendChild(name);
+			mainDiv.appendChild(sDiv);
+			document.getElementById("tickets").appendChild(mainDiv);
+
+			add.addEventListener("click", () => {
+				const ticketU = ticket.tickets.find(ticket => ticket.id === element.id);
+
+				if (ticketU) {
+					ticketU.quantity += 1;
+
+					num.innerText = ticketU.quantity;
+				}
+			});
+
+			minus.addEventListener("click", () => {
+				const ticketU = ticket.tickets.find(ticket => ticket.id === element.id);
+
+				if (ticketU && ticketU.quantity > 0) {
+					ticketU.quantity -= 1;
+
+					num.innerText = ticketU.quantity;
+				}
+			});
+		});
+	})
+	.catch(error => {
+		console.error('Błąd:', error.message);
+	})

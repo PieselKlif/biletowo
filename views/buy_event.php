@@ -3,7 +3,7 @@ if (!defined("ABSPATH")) die("Brak dostępu");
 function get_buy_site($erow, $vrow, $arow, $date) {
 	?>
 	<main id="buy">
-		<p class="he">1. Wybór biletów</p>
+		<h2 class="he">1. Wybór biletów</h2>
 		<div class="main">
 			<div class="col1">
 				<img src="<?= WebConf::$uploadDir . $vrow['venue_map'] ?>" alt="Plan obiektu">
@@ -13,17 +13,35 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 					
 					<label for="event-time">Wybierz godzinę:</label>
 					<select id="event-time"></select>
+
+					<div id="tickets"></div>
+
 					<?php
-					$res = DB::query("SELECT * FROM ticket_prices WHERE event_id = :i AND sector_id IS NULL", ["i" => $erow['id']]);
-					foreach($res as $row){
-						?>
-							<div class="panel">
-								<p><?= $row['display_name'] ?></p>
-							</div>
-						<?php
+					$res = DB::query("SELECT id FROM ticket_prices WHERE event_id = :i AND sector_id IS NOT NULL", ["i" => $erow['id']]);
+
+					if (!empty($res)) {
+					?>
+					<div class="panel">
+						<h3>Wybierz miejsca</h3>
+						<label for="event-sector">Wybierz sektor:</label>
+						<select id="event-sector">
+							<option value="">C2</option>
+							<option value="">C3</option>
+							<option value="">C4</option>
+							<option value="">D11</option>
+						</select>
+						<label for="event-sector">Wybierz sektor:</label>
+						<select id="event-sector">
+							<option value="">C2</option>
+							<option value="">C3</option>
+							<option value="">C4</option>
+							<option value="">D11</option>
+						</select>
+					</div>
+					<?php
 					}
-				?>
-				</div>
+					?>
+			</div>
 			</div>
 			<div class="col2">
 				<div>

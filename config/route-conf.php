@@ -77,7 +77,11 @@ route('/wydarzenia/:slug/buy', function ($slug) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   route('/api/event/:id/time', function ($id) {
-    get_event_time($id);
+    api_get_event_time($id);
+  });
+
+  route('/api/event/:id/tickets', function ($id) {
+    api_get_event_tickets($id);
   });
 }
 
