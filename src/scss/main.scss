@@ -215,7 +215,7 @@ main {
 
 		.main {
 			display: grid;
-			grid-template-columns: auto auto;
+			grid-template-columns: 50vw auto;
 
 			.col1 {
 				display: flex;
@@ -288,6 +288,103 @@ main {
 								font-size: 1.3rem;
 							}
 						}
+					}
+				}
+
+				.selected {
+					background-color: $secondary-50;
+					border-radius: 10px;
+					padding: 25px 20px;
+
+					display: flex;
+					flex-direction: column;
+
+					h3 {
+						text-align: center;
+						font-size: 1.5rem;
+					}
+
+					h4 {
+						font-size: 1.2rem;
+						text-align: center;
+						margin: 25px 0 10px;
+					}
+
+					label {
+						text-align: center;
+						margin: 10px 0 5px;
+					}
+
+					select {
+						text-align: center;
+					}
+
+					.ticket-type {
+						display: flex;
+						justify-content: center;
+						gap: 10px;
+						margin-bottom: 15px;
+					}
+	
+					.ticket-type button {
+						padding: 8px 15px;
+						border: none;
+						cursor: pointer;
+						border-radius: 6px;
+						font-size: 14px;
+						font-weight: bold;
+						transition: 0.3s;
+						background: $primary;
+						color: $text;
+					}
+	
+					.selected-ticket {
+						outline: 3px solid $secondary-50;
+					}
+
+					.seat-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+					}
+
+					.seat {
+						width: 40px;
+						height: 40px;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						border-radius: 6px;
+						font-weight: bold;
+						cursor: pointer;
+						transition: 0.3s;
+						border: 2px solid transparent;
+					}
+
+					.available {
+						background: #66a75a;
+						color: white;
+					}
+
+					.occupied {
+						background: #777453;
+						color: white;
+						cursor: not-allowed;
+					}
+
+					.selected-normal {
+						background: #f4d41c;
+						color: white;
+					}
+
+					.selected-discount {
+						background: #5145fe;
+						color: white;
+					}
+
+					.seat:hover:not(.occupied):not(.selected-normal):not(.selected-discount) {
+						border: 2px solid $secondary-50;
 					}
 				}
 			}

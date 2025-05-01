@@ -83,6 +83,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   route('/api/event/:id/tickets', function ($id) {
     api_get_event_tickets($id);
   });
+
+  route('/api/venue/:id/sectors', function ($id) {
+    api_get_venue_sectors($id);
+  });
 }
 
 // ---- END API ----

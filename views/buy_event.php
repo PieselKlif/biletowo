@@ -21,22 +21,46 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 
 					if (!empty($res)) {
 					?>
-					<div class="panel">
+					<div class="selected">
 						<h3>Wybierz miejsca</h3>
-						<label for="event-sector">Wybierz sektor:</label>
-						<select id="event-sector">
-							<option value="">C2</option>
-							<option value="">C3</option>
-							<option value="">C4</option>
-							<option value="">D11</option>
+						<label for="event-sector">Wybierz sektor</label>
+						<select id="event-sector"></select>
+						<label for="event-row">Wybierz rząd</label>
+						<select id="event-row">
+							<option value="">1</option>
+							<option value="">2</option>
+							<option value="">3</option>
+							<option value="">4</option>
 						</select>
-						<label for="event-sector">Wybierz sektor:</label>
-						<select id="event-sector">
-							<option value="">C2</option>
-							<option value="">C3</option>
-							<option value="">C4</option>
-							<option value="">D11</option>
-						</select>
+
+						<h4>Wybierz typ biletu</h4>
+						<div class="ticket-type">
+							<button class="selected-ticket">Normalny<br>225.12 zł</button>
+							<button>Ulgowy<br>183.51 zł</button>
+						</div>
+
+						<h4>Wybierz miejsca</h4>
+
+						<div class="seat-selector">
+							<div class="seat available">1</div>
+							<div class="seat available">2</div>
+							<div class="seat occupied">3</div>
+							<div class="seat available">4</div>
+							<div class="seat available">5</div>
+							<div class="seat available">6</div>
+							<div class="seat occupied">7</div>
+							<div class="seat occupied">8</div>
+							<div class="seat available">9</div>
+							<div class="seat available">10</div>
+							<div class="seat available">11</div>
+							<div class="seat available">12</div>
+							<div class="seat available">13</div>
+							<div class="seat available">14</div>
+							<div class="seat available">15</div>
+							<div class="seat available">16</div>
+							<div class="seat available">17</div>
+							<div class="seat available">18</div>
+						</div>
 					</div>
 					<?php
 					}
@@ -58,6 +82,7 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 		</div>
 		<script>
 			eid = <?= $erow['id'] ?>;
+			vid = <?= $vrow['id'] ?>;
 		</script>
 		<script src="/src/js/buy.js"></script>
 	</main>

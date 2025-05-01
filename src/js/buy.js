@@ -117,3 +117,24 @@ fetch(`http://localhost:3000/api/event/${eid}/tickets`)
 	.catch(error => {
 		console.error('Błąd:', error.message);
 	})
+	
+fetch(`/api/venue/${vid}/sectors`)
+.then(response => {
+	if (!response.ok) {
+		return response.json().then(errorData => {
+				throw new Error(errorData.error);
+		});
+	}
+	return response.json();
+})
+.then(data => {
+	data.forEach(element => {
+		const option = document.createElement("option");
+		option.innerText = element.name;
+		option.value = element.id;
+		document.getElementById("event-sector").appendChild(option);
+	});
+})
+.catch(error => {
+	console.error('Błąd:', error.message);
+})

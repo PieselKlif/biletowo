@@ -65,3 +65,26 @@ function api_get_event_tickets($id){
 		]);
 	}
 }
+
+function api_get_venue_sectors($id) {
+	$res = DB::query("SELECT id, name FROM sectors WHERE venue_id = :i", ["i" => $id]);
+
+	if (!empty($res)) {
+		$json = [];
+
+		foreach ($res as $row) {
+			$arra = array("id" => $row['id'], "name" => $row['name']);
+
+			array_push($json, $arra);
+		}
+
+		header('Content-Type: application/json');
+		echo json_encode($json);
+	} else {
+		http_response_code(404);
+		header('Content-Type: application/json');
+		echo json_encode([
+			'error' => 'Venue not found'
+		]);
+	}
+}
