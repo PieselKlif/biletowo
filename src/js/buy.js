@@ -11,9 +11,8 @@ function updateTime(selectedEvent) {
 	if (selectedEvent) {
 		selectedEvent.event_times.forEach(time => {
 			const option = document.createElement("option");
-			const timeParts = time.split(":");
-			option.value = time;
-			option.innerText = `${timeParts[0]}:${timeParts[1]}`;
+			option.value = time.id;
+			option.innerText = time.time;
 			eventTime.appendChild(option);
 		});
 	}

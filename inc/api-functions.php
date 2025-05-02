@@ -2,14 +2,17 @@
 if (!defined("ABSPATH")) die("Brak dostępu");
 
 function api_get_event_time($id){
-	$res = DB::query("SELECT event_date, event_time FROM event_dates WHERE event_id = :i", ["i" => $id]);
+	$res = DB::query("SELECT id, event_date, event_time FROM event_dates WHERE event_id = :i", ["i" => $id]);
 
 	if (!empty($res)) {
 		$grouped = [];
 
 		foreach ($res as $row) {
 			$date = $row['event_date'];
-			$time = $row['event_time'];
+			$time = [
+				"id" => $row['id'],
+				"time" => substr($row['event_time'], 0, 5)
+			];
 
 			if (!isset($grouped[$date])) {
 				$grouped[$date] = [

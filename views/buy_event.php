@@ -10,7 +10,7 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 				<div class="tickets_panel">
 					<label for="event-date">Wybierz datę:</label>
 					<select id="event-date"></select>
-					
+					<br><br>
 					<label for="event-time">Wybierz godzinę:</label>
 					<select id="event-time"></select>
 
@@ -37,24 +37,24 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 						<h4>Wybierz miejsca</h4>
 
 						<div class="seat-selector">
-							<div class="seat available">1</div>
-							<div class="seat available">2</div>
-							<div class="seat occupied">3</div>
-							<div class="seat available">4</div>
-							<div class="seat available">5</div>
-							<div class="seat available">6</div>
-							<div class="seat occupied">7</div>
-							<div class="seat occupied">8</div>
-							<div class="seat available">9</div>
-							<div class="seat available">10</div>
-							<div class="seat available">11</div>
-							<div class="seat available">12</div>
-							<div class="seat available">13</div>
-							<div class="seat available">14</div>
-							<div class="seat available">15</div>
-							<div class="seat available">16</div>
-							<div class="seat available">17</div>
-							<div class="seat available">18</div>
+							<button class="seat available">1</button>
+							<button class="seat available">2</button>
+							<button class="seat occupied" tabindex="-1">3</button>
+							<button class="seat available">4</button>
+							<button class="seat available">5</button>
+							<button class="seat available">6</button>
+							<button class="seat occupied" tabindex="-1">7</button>
+							<button class="seat occupied" tabindex="-1">8</button>
+							<button class="seat available">9</button>
+							<button class="seat available">10</button>
+							<button class="seat available">11</button>
+							<button class="seat available">12</button>
+							<button class="seat available">13</button>
+							<button class="seat available">14</button>
+							<button class="seat available">15</button>
+							<button class="seat available">16</button>
+							<button class="seat available">17</button>
+							<button class="seat available">18</button>
 						</div>
 					</div>
 					<?php
