@@ -2,6 +2,7 @@ const eventDate = document.getElementById("event-date");
 const eventTime = document.getElementById("event-time");
 
 const ticket = {
+	'time' : 0,
 	'tickets': [],
 	'seats': []
 };
@@ -16,7 +17,13 @@ function updateTime(selectedEvent) {
 			eventTime.appendChild(option);
 		});
 	}
+	
+	ticket.time = parseInt(eventTime.value);
 }
+
+eventTime.addEventListener("change", (e) => {
+	ticket.time = parseInt(e.target.value);
+});
 
 function updateRows(sectorid) {
 	fetch(`/api/venue/sector/${sectorid}/rows`)
