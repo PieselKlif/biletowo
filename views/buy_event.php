@@ -26,12 +26,7 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 						<label for="event-sector">Wybierz sektor</label>
 						<select id="event-sector"></select>
 						<label for="event-row">Wybierz rząd</label>
-						<select id="event-row">
-							<option value="">1</option>
-							<option value="">2</option>
-							<option value="">3</option>
-							<option value="">4</option>
-						</select>
+						<select id="event-row"></select>
 
 						<h4>Wybierz typ biletu</h4>
 						<div class="ticket-type">

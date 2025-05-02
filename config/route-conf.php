@@ -87,6 +87,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   route('/api/venue/:id/sectors', function ($id) {
     api_get_venue_sectors($id);
   });
+
+  route('/api/venue/sector/:id/rows', function ($id) {
+    api_get_venue_sector_rows($id);
+  });
 }
 
 // ---- END API ----

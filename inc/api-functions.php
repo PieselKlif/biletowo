@@ -88,3 +88,26 @@ function api_get_venue_sectors($id) {
 		]);
 	}
 }
+
+function api_get_venue_sector_rows($id) {
+	$res = DB::query("SELECT id, number FROM `rows` WHERE sector_id = :i", ["i" => $id]);
+
+	if (!empty($res)) {
+		$json = [];
+
+		foreach ($res as $row) {
+			$arra = array("id" => $row['id'], "name" => $row['number']);
+
+			array_push($json, $arra);
+		} 
+
+		header('Content-Type: application/json');
+		echo json_encode($json);
+	} else {
+		http_response_code(404);
+		header('Content-Type: application/json');
+		echo json_encode([
+			'error' => 'Sector not found'
+		]);
+	}
+}

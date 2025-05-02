@@ -19,6 +19,32 @@ function updateTime(selectedEvent) {
 	}
 }
 
+function updateRows(sectorid) {
+	fetch(`/api/venue/sector/${sectorid}/rows`)
+		.then(response => {
+			if (!response.ok) {
+				return response.json().then(errorData => {
+						throw new Error(errorData.error);
+				});
+			}
+			return response.json();
+		})
+		.then(data => {
+			document.getElementById("event-row").innerHTML = "";
+
+			data.forEach(element => {
+				const option = document.createElement("option");
+				option.innerText = element.name;
+				option.value = element.id;
+
+				document.getElementById("event-row").appendChild(option);
+			});
+		})
+		.catch(error => {
+			console.error('Błąd:', error.message);
+		});
+}
+
 fetch(`/api/event/${eid}/time`)
 	.then(response => {
 		if (!response.ok) {
@@ -119,22 +145,29 @@ fetch(`http://localhost:3000/api/event/${eid}/tickets`)
 	})
 	
 fetch(`/api/venue/${vid}/sectors`)
-.then(response => {
-	if (!response.ok) {
-		return response.json().then(errorData => {
-				throw new Error(errorData.error);
+	.then(response => {
+		if (!response.ok) {
+			return response.json().then(errorData => {
+					throw new Error(errorData.error);
+			});
+		}
+		return response.json();
+	})
+	.then(data => {
+		data.forEach(element => {
+			const option = document.createElement("option");
+			option.innerText = element.name;
+			option.value = element.id;
+			document.getElementById("event-sector").appendChild(option);
+
 		});
-	}
-	return response.json();
-})
-.then(data => {
-	data.forEach(element => {
-		const option = document.createElement("option");
-		option.innerText = element.name;
-		option.value = element.id;
-		document.getElementById("event-sector").appendChild(option);
-	});
-})
-.catch(error => {
-	console.error('Błąd:', error.message);
-})
+
+		updateRows(document.getElementById("event-sector").value);
+		
+		document.getElementById("event-sector").addEventListener("change", (e) => {
+			updateRows(e.target.value);
+		});
+	})
+	.catch(error => {
+		console.error('Błąd:', error.message);
+	})
