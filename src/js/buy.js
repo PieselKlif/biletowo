@@ -98,9 +98,9 @@ fetch(`http://localhost:3000/api/event/${eid}/tickets`)
 			const name = document.createElement("h2");
 			const sDiv = document.createElement("div");
 			const price = document.createElement("h3");
-			const minus = document.createElement("span");
+			const minus = document.createElement("button");
 			const num = document.createElement("span");
-			const add = document.createElement("span");
+			const add = document.createElement("button");
 
 			mainDiv.classList.add("ticket");
 			minus.classList.add("minus");
