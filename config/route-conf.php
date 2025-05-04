@@ -91,6 +91,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   route('/api/venue/sector/:id/rows', function ($id) {
     api_get_venue_sector_rows($id);
   });
+
+  route('/api/venue/row/:rid/time/:tid', function ($rid, $tid) {
+    api_get_seats($rid, $tid);
+  });
 }
 
 // ---- END API ----

@@ -25,6 +25,37 @@ eventTime.addEventListener("change", (e) => {
 	ticket.time = parseInt(e.target.value);
 });
 
+function updateSeats(rowid) {
+	fetch(`/api/venue/row/${rowid}/time/${ticket.time}`)
+		.then(response => {
+			if (!response.ok) {
+				return response.json().then(errorData => {
+						throw new Error(errorData.error);
+				});
+			}
+			return response.json();
+		})
+		.then(data => {
+			document.getElementById("seat-selector").innerHTML = "";
+
+			data.forEach(element => {
+				const button = document.createElement("button");
+				button.classList.add("seat");
+				button.innerText = element.name;
+
+				if (element.aviable == false){
+					button.classList.add("occupied");
+					button.tabindex = "-1";
+				}
+
+				document.getElementById("seat-selector").appendChild(button);
+			});
+		})
+		.catch(error => {
+			console.error('Błąd:', error.message);
+		});
+}
+
 function updateRows(sectorid) {
 	fetch(`/api/venue/sector/${sectorid}/rows`)
 		.then(response => {
@@ -44,6 +75,12 @@ function updateRows(sectorid) {
 				option.value = element.id;
 
 				document.getElementById("event-row").appendChild(option);
+			});
+
+			updateSeats(document.getElementById("event-row").value);
+
+			document.getElementById("event-row").addEventListener("change", (e) => {
+				updateSeats(e.target.value);
 			});
 		})
 		.catch(error => {

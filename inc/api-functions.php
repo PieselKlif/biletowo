@@ -114,3 +114,32 @@ function api_get_venue_sector_rows($id) {
 		]);
 	}
 }
+
+function api_get_seats($rid, $tid) {
+	$res = DB::query("SELECT id, number FROM seats WHERE row_id = :i", ["i" => $rid]);
+
+	if (!empty($res)) {
+		$occupied = DB::query("SELECT ts.seat_id FROM ticket_seats ts JOIN tickets t ON ts.ticket_id = t.id WHERE t.date_id = :tid", ["tid" => $tid]);		
+
+		$taken_ids = array_column($occupied, 'seat_id');
+
+		$json = [];
+	
+		foreach ($res as $seat) {
+			$json[] = [
+				"id" => $seat['id'],
+				"name" => $seat['number'],
+				"aviable" => !in_array($seat['id'], $taken_ids)
+			];
+		}
+	
+		header('Content-Type: application/json');
+		echo json_encode($json);
+	} else {
+		http_response_code(404);
+		header('Content-Type: application/json');
+		echo json_encode([
+			'error' => 'Row not found'
+		]);
+	}
+}

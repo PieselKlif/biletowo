@@ -36,26 +36,7 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 
 						<h4>Wybierz miejsca</h4>
 
-						<div class="seat-selector">
-							<button class="seat">1</button>
-							<button class="seat">2</button>
-							<button class="seat occupied" tabindex="-1">3</button>
-							<button class="seat">4</button>
-							<button class="seat">5</button>
-							<button class="seat">6</button>
-							<button class="seat occupied" tabindex="-1">7</button>
-							<button class="seat occupied" tabindex="-1">8</button>
-							<button class="seat">9</button>
-							<button class="seat">10</button>
-							<button class="seat">11</button>
-							<button class="seat">12</button>
-							<button class="seat">13</button>
-							<button class="seat">14</button>
-							<button class="seat">15</button>
-							<button class="seat">16</button>
-							<button class="seat">17</button>
-							<button class="seat">18</button>
-						</div>
+						<div id="seat-selector"></div>
 					</div>
 					<?php
 					}
