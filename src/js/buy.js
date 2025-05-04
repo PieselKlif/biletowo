@@ -23,6 +23,7 @@ function updateTime(selectedEvent) {
 
 eventTime.addEventListener("change", (e) => {
 	ticket.time = parseInt(e.target.value);
+	updateSeats(document.getElementById("event-row").value);
 });
 
 function updateSeats(rowid) {
@@ -45,7 +46,7 @@ function updateSeats(rowid) {
 
 				if (element.aviable == false){
 					button.classList.add("occupied");
-					button.tabindex = "-1";
+					button.tabIndex = -1;
 				}
 
 				document.getElementById("seat-selector").appendChild(button);
