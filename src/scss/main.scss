@@ -363,26 +363,16 @@ main {
 						border: 2px solid transparent;
 						background: #66a75a;
 						color: white;
+
+						&:hover:not(.occupied):not(.selected-normal):not(.selected-discount) {
+							border: 2px solid $secondary-200;
+						}
 					}
 
 					.occupied {
 						background: #777453;
 						color: white;
 						cursor: not-allowed;
-					}
-
-					.selected-normal {
-						background: #f4d41c;
-						color: white;
-					}
-
-					.selected-discount {
-						background: #5145fe;
-						color: white;
-					}
-
-					.seat:hover:not(.occupied):not(.selected-normal):not(.selected-discount) {
-						border: 2px solid $secondary-50;
 					}
 				}
 			}

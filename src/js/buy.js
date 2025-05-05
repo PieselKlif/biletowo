@@ -51,7 +51,7 @@ function updateTickets(sectorid) {
 					button.classList.add("selected-ticket");
 				}
 
-				button.innerHTML = `${element.name}<br>${element.price}`;
+				button.innerHTML = `${element.name}<br>${element.price} zł`;
 				document.getElementById("ticket-type").appendChild(button);
 
 				button.addEventListener("click", (e) => {
