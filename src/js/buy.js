@@ -7,6 +7,9 @@ const ticket = {
 	'seats': []
 };
 
+let price = {};
+let selectedPrice = 0;
+
 function updateTime(selectedEvent) {
 	eventTime.innerHTML = "";
 	if (selectedEvent) {
@@ -25,6 +28,44 @@ eventTime.addEventListener("change", (e) => {
 	ticket.time = parseInt(e.target.value);
 	updateSeats(document.getElementById("event-row").value);
 });
+
+function updateTickets(sectorid) {
+	fetch(`/api/tickets/type/event/${eid}/sector/${sectorid}`)
+		.then(response => {
+			if (!response.ok) {
+				return response.json().then(errorData => {
+						throw new Error(errorData.error);
+				});
+			}
+			return response.json();
+		})
+		.then(data => {
+			document.getElementById("ticket-type").innerHTML = "";
+			price = data;
+			selectedPrice = 0;
+
+			data.forEach((element, i) => {
+				const button = document.createElement("button");
+
+				if (i == 0) {
+					button.classList.add("selected-ticket");
+				}
+
+				button.innerHTML = `${element.name}<br>${element.price}`;
+				document.getElementById("ticket-type").appendChild(button);
+
+				button.addEventListener("click", (e) => {
+					document.querySelector(".selected-ticket").classList.remove("selected-ticket");
+					e.target.classList.add("selected-ticket");
+
+					selectedPrice = i;
+				});
+			});
+		})
+		.catch(error => {
+			console.error('Błąd:', error.message);
+		});
+}
 
 function updateSeats(rowid) {
 	fetch(`/api/venue/row/${rowid}/time/${ticket.time}`)
@@ -207,9 +248,11 @@ fetch(`/api/venue/${vid}/sectors`)
 		});
 
 		updateRows(document.getElementById("event-sector").value);
+		updateTickets(document.getElementById("event-sector").value);
 		
 		document.getElementById("event-sector").addEventListener("change", (e) => {
 			updateRows(e.target.value);
+			updateTickets(e.target.value);
 		});
 	})
 	.catch(error => {

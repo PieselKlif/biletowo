@@ -320,14 +320,14 @@ main {
 						text-align: center;
 					}
 
-					.ticket-type {
+					#ticket-type {
 						display: flex;
 						justify-content: center;
 						gap: 10px;
 						margin-bottom: 15px;
 					}
 	
-					.ticket-type button {
+					#ticket-type button {
 						padding: 8px 15px;
 						border: none;
 						cursor: pointer;
@@ -340,7 +340,7 @@ main {
 					}
 	
 					.selected-ticket {
-						outline: 3px solid $secondary-50;
+						outline: 2px solid $secondary-200;
 					}
 
 					#seat-selector {

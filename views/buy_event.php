@@ -29,10 +29,7 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 						<select id="event-row"></select>
 
 						<h4>Wybierz typ biletu</h4>
-						<div class="ticket-type">
-							<button class="selected-ticket">Normalny<br>225.12 zł</button>
-							<button>Ulgowy<br>183.51 zł</button>
-						</div>
+						<div id="ticket-type"></div>
 
 						<h4>Wybierz miejsca</h4>
 
