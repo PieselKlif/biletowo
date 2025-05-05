@@ -21,7 +21,7 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 
 					if (!empty($res)) {
 					?>
-					<div class="selected">
+					<div class="select-panel">
 						<h3>Wybierz miejsca</h3>
 						<label for="event-sector">Wybierz sektor</label>
 						<select id="event-sector"></select>

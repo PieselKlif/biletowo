@@ -90,7 +90,35 @@ function updateSeats(rowid) {
 					button.tabIndex = -1;
 				}
 
+				const seat = ticket.seats.find(seat => seat.id === element.id);
+
+				if (seat) {
+					const pr = price.find(price => price.id === seat.type);
+
+					button.style = `background: ${pr.color_hex};`;
+					button.classList.add("selected");
+				}
+
 				document.getElementById("seat-selector").appendChild(button);
+
+				button.addEventListener("click", (e) => {
+					if (e.target.classList.contains("selected")){
+						e.target.classList.remove("selected");
+						e.target.style = "";
+
+						ticket.seats = ticket.seats.filter(seat => seat.id !== element.id);
+					} else {
+						e.target.classList.add("selected");
+						e.target.style = `background: ${price[selectedPrice].color_hex};`;
+
+						const seat = {
+							'id': element.id,
+							'type': price[selectedPrice].id
+						};
+
+						ticket.seats.push(seat);
+					}
+				});
 			});
 		})
 		.catch(error => {
