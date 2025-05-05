@@ -143,3 +143,18 @@ function api_get_seats($rid, $tid) {
 		]);
 	}
 }
+
+function api_get_ticket_price($eid, $sid) {
+	$res = DB::query("SELECT ticket_prices.id, ticket_prices.price, ticket_types.name, ticket_types.color_hex FROM ticket_prices INNER JOIN ticket_types ON ticket_prices.ticket_type_id=ticket_types.id WHERE ticket_prices.event_id = :eid AND ticket_prices.sector_id = :sid;", ["eid" => $eid, "sid" => $sid]);
+
+	if (!empty($res)) {
+		header('Content-Type: application/json');
+		echo json_encode($res);
+	} else {
+		http_response_code(404);
+		header('Content-Type: application/json');
+		echo json_encode([
+			'error' => 'Ticket not found'
+		]);
+	}
+}

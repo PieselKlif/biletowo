@@ -95,6 +95,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   route('/api/venue/row/:rid/time/:tid', function ($rid, $tid) {
     api_get_seats($rid, $tid);
   });
+
+  route('/api/tickets/type/event/:eid/sector/:sid', function ($eid, $sid) {
+    api_get_ticket_price($eid, $sid);
+  });
 }
 
 // ---- END API ----
