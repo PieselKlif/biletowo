@@ -26,6 +26,7 @@ function updateTime(selectedEvent) {
 
 eventTime.addEventListener("change", (e) => {
 	ticket.time = parseInt(e.target.value);
+	ticket.seats = [];	
 	updateSeats(document.getElementById("event-row").value);
 });
 
@@ -192,7 +193,7 @@ fetch(`/api/event/${eid}/time`)
 		console.error('Błąd:', error.message);
 	});
 
-fetch(`http://localhost:3000/api/event/${eid}/tickets`)
+fetch(`/api/event/${eid}/tickets`)
 	.then(response => {
 		if (!response.ok) {
 			return response.json().then(errorData => {
