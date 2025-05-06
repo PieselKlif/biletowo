@@ -375,6 +375,23 @@ main {
 						cursor: not-allowed;
 					}
 				}
+
+				.ticket_details {
+					p {
+						margin-top: 15px;
+						margin-bottom: 10px;
+					}
+
+					input {
+						background-color: $secondary-50;
+						border: none;
+						padding: 6px 13px;
+						border-radius: 10px;
+						font-size: 1.1rem;
+						margin-right: 10px;
+						margin-bottom: 15px;
+					}
+				}
 			}
 
 			.col2 {
