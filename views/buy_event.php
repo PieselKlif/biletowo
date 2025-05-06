@@ -48,6 +48,13 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 					<input type="text" name="fname" id="fname" placeholder="Imię">
 					<input type="text" name="lname" id="lname" placeholder="Nazwisko">
 				</div>
+				<div class="summary_panel">
+					<h2 class="he">3. Podsumowanie</h2>
+					<table id="summaryTable"></table>
+					<p><b>IMIĘ</b> <span id="name"></span></p>
+					<p>Data: <span id="date"></span></p>
+					<p>Godzina: <span id="time"></span></p>
+				</div>
 			</div>
 			<div class="col2">
 				<div>
