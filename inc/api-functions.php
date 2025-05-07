@@ -158,3 +158,30 @@ function api_get_ticket_price($eid, $sid) {
 		]);
 	}
 }
+
+function api_post_get_table_data($data) {
+	$json = array("sum" => 0, "tickets" => [], "seats" => []);
+	
+	foreach($data['seats'] as $row){
+		$res = DB::query("SELECT s.number AS seat, r.number AS row, sec.name AS sector, tp.price, tt.name AS type FROM seats s JOIN `rows` r ON s.row_id = r.id JOIN sectors sec ON r.sector_id = sec.id INNER JOIN ticket_prices tp ON tp.id = :tpid AND tp.sector_id = sec.id INNER JOIN ticket_types tt ON tt.id = tp.ticket_type_id WHERE s.id = :sid LIMIT 1;", ['tpid' => $row['type'], 'sid' => $row['id']]);
+	
+		if (!empty($res)){
+			$json['sum'] += (float)$res[0]['price'];
+			$json['seats'][] = $res[0];
+		}
+	}
+
+	foreach($data['tickets'] as $row){
+		$res = DB::query("SELECT display_name, price FROM ticket_prices WHERE id = :id", ["id" => $row['id']]);
+
+		if (!empty($res)){
+			$json['sum'] += (float)$res[0]['price'] * $row['quantity'];
+			$json['tickets'][] = $res[0];
+		}
+	}
+
+	$json['sum'] = number_format($json['sum'], 2, '.', '');
+
+	header('Content-Type: application/json');
+	echo json_encode($json);
+}
