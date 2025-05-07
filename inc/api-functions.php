@@ -160,6 +160,10 @@ function api_get_ticket_price($eid, $sid) {
 }
 
 function api_post_get_table_data($data) {
+	usort($data['seats'], function($a, $b) {
+		return $a['id'] - $b['id'];
+	});
+
 	$json = array("sum" => 0, "tickets" => [], "seats" => []);
 	
 	foreach($data['seats'] as $row){
