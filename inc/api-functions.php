@@ -181,7 +181,7 @@ function api_post_get_table_data($data) {
 	
 			if (!empty($res)){
 				$json['sum'] += (float)$res[0]['price'] * $row['quantity'];
-				$fjs = array("name" => $res[0]["display_name"], "price" => $res[0]["price"], "quantity" => $row['quantity']);
+				$fjs = array("name" => $res[0]["display_name"], "price" => $res[0]["price"], "sum" => number_format((float)$res[0]["price"] * $row['quantity'], 2, '.', ''), "quantity" => $row['quantity']);
 				$json['tickets'][] = $fjs;
 			}
 		}
