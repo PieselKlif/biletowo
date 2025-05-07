@@ -393,7 +393,7 @@ main {
 				}
 
 				.summary_panel {
-					#summaryTable {
+					#summary-table {
 						width: 100%;
 						border-radius: 10px;
 						border-collapse: collapse;
@@ -421,9 +421,13 @@ main {
 								background-color: $table-row-2;
 							}
 
+							&:first-child > td {
+								border-top: none !important;
+							}
+
 							&:last-child {
 								td {
-									border-top: 1px solid black;
+									border-top: 2px solid black;
 
 									&:first-child {
 										border-bottom-left-radius: 10px;

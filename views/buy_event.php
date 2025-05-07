@@ -30,6 +30,7 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 
 						<h4>Wybierz typ biletu</h4>
 						<div id="ticket-type"></div>
+						<!-- TODO FIX zajęte miejsca po zmienie daty -->
 
 						<h4>Wybierz miejsca</h4>
 
@@ -50,26 +51,11 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 				</div>
 				<div class="summary_panel">
 					<h2 class="he">3. Podsumowanie</h2>
-					<table id="summaryTable">
-						<tr>
-							<td>Sektor <b>A</b>, Rząd <b>3</b>, Miejsce <b>14</b></td>
-							<td><b>Normalny</b></td>
-							<td><b>104,95 zł</b></td>
-						</tr>
-						<tr>
-							<td>Sektor <b>A</b>, Rząd <b>3</b>, Miejsce <b>15</b></td>
-							<td><b>Normalny</b></td>
-							<td><b>104,95 zł</b></td>
-						</tr>
-						<tr>
-							<td><b>Płyta - Ulgowy</b></td>
-							<td><b>x1</b></td>
-							<td><b>226,45 zł</b></td>
-						</tr>
+					<table id="summary-table">
 						<tr>
 							<td><b>Suma</b></td>
 							<td></td>
-							<td><b>436,35 zł</b></td>
+							<td><b>0.00 zł</b></td>
 						</tr>
 					</table>
 					<p><b>IMIĘ: </b> <span id="name">Andrzej Kowalski</span></p>

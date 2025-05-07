@@ -1,5 +1,6 @@
 const eventDate = document.getElementById("event-date");
 const eventTime = document.getElementById("event-time");
+const summaryTable = document.getElementById("summary-table");
 
 const ticket = {
 	'time' : 0,
@@ -9,6 +10,72 @@ const ticket = {
 
 let price = {};
 let selectedPrice = 0;
+
+function updateTable() {
+	fetch(`/api/table`, {
+		method: 'POST',
+		headers: {
+			'Content_Type': 'application/json'
+		},
+		body: JSON.stringify(ticket)
+	})
+		.then(response => response.json())
+		.then(data => {
+			summaryTable.innerHTML = "";
+
+			data.seats.forEach(element => {
+				const row = document.createElement("tr");
+				const name = document.createElement("td");
+				const type = document.createElement("td");
+				const price = document.createElement("td");
+
+				name.innerHTML = `Sektor <b>${element.sector}</b>, Rząd <b>${element.row}</b>, Miejsce <b>${element.seat}</b>`;
+				type.innerHTML = `<b>${element.type}</b>`;
+				price.innerHTML = `<b>${element.price} zł</b>`;
+
+				row.appendChild(name);
+				row.appendChild(type);
+				row.appendChild(price);
+
+				summaryTable.appendChild(row);
+			});
+
+			data.tickets.forEach(element => {
+				const row = document.createElement("tr");
+				const name = document.createElement("td");
+				const type = document.createElement("td");
+				const price = document.createElement("td");
+
+				name.innerHTML = `<b>${element.name}</b>`;
+				type.innerHTML = `<b>${element.quantity}x ${element.price} zł</b>`;
+				price.innerHTML = `<b>${element.sum} zł</b>`;
+
+				row.appendChild(name);
+				row.appendChild(type);
+				row.appendChild(price);
+
+				summaryTable.appendChild(row);
+			});
+
+			const row = document.createElement("tr");
+			const name = document.createElement("td");
+			const type = document.createElement("td");
+			const price = document.createElement("td");
+
+			name.innerHTML = `<b>Suma</b>`;
+			type.innerHTML = ``;
+			price.innerHTML = `<b>${data.sum} zł</b>`;
+
+			row.appendChild(name);
+			row.appendChild(type);
+			row.appendChild(price);
+
+			summaryTable.appendChild(row);
+		})
+		.catch(error => {
+			console.error('Błąd:', error);
+		})
+}
 
 function updateTime(selectedEvent) {
 	eventTime.innerHTML = "";
@@ -119,6 +186,8 @@ function updateSeats(rowid) {
 
 						ticket.seats.push(seat);
 					}
+
+					updateTable();
 				});
 			});
 		})
@@ -240,6 +309,7 @@ fetch(`/api/event/${eid}/tickets`)
 					ticketU.quantity += 1;
 
 					num.innerText = ticketU.quantity;
+					updateTable();
 				}
 			});
 
@@ -250,6 +320,7 @@ fetch(`/api/event/${eid}/tickets`)
 					ticketU.quantity -= 1;
 
 					num.innerText = ticketU.quantity;
+					updateTable();
 				}
 			});
 		});
