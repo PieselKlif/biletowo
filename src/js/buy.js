@@ -1,6 +1,11 @@
 const eventDate = document.getElementById("event-date");
 const eventTime = document.getElementById("event-time");
 const summaryTable = document.getElementById("summary-table");
+const fname = document.getElementById("fname");
+const lname = document.getElementById("lname");
+const name = document.getElementById("name");
+const date = document.getElementById("date");
+const time = document.getElementById("time");
 
 const ticket = {
 	'time' : 0,
@@ -10,6 +15,8 @@ const ticket = {
 
 let price = {};
 let selectedPrice = 0;
+
+let selectedDate = [];
 
 function updateTable() {
 	fetch(`/api/table`, {
@@ -78,6 +85,11 @@ function updateTable() {
 }
 
 function updateTime(selectedEvent) {
+	const dateParts = document.getElementById("event-date").value.split("-");
+	date.innerText = `${dateParts[2]}.${dateParts[1]}.${dateParts[0]}`;
+
+	selectedDate = selectedEvent;
+	
 	eventTime.innerHTML = "";
 	if (selectedEvent) {
 		selectedEvent.event_times.forEach(time => {
@@ -89,12 +101,15 @@ function updateTime(selectedEvent) {
 	}
 	
 	ticket.time = parseInt(eventTime.value);
+
+	time.innerText = selectedDate.event_times.find(event => event.id === parseInt(eventTime.value)).time;
 }
 
 eventTime.addEventListener("change", (e) => {
 	ticket.time = parseInt(e.target.value);
 	ticket.seats = [];	
 	updateSeats(document.getElementById("event-row").value);
+	time.innerText = selectedDate.event_times.find(event => event.id === parseInt(eventTime.value)).time;
 });
 
 function updateTickets(sectorid) {
@@ -358,3 +373,11 @@ fetch(`/api/venue/${vid}/sectors`)
 	.catch(error => {
 		console.error('Błąd:', error.message);
 	})
+
+fname.addEventListener("input", (e) => {
+	name.innerText = `${e.target.value} ${lname.value}`;
+})
+
+lname.addEventListener("input", (e) => {
+	name.innerText = `${fname.value} ${e.target.value}`;
+})

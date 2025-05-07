@@ -58,9 +58,9 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 							<td><b>0.00 zł</b></td>
 						</tr>
 					</table>
-					<p><b>IMIĘ: </b> <span id="name">Andrzej Kowalski</span></p>
-					<p>Data: <span id="date">20.06.2024</span></p>
-					<p>Godzina: <span id="time">20:00</span></p>
+					<p><b>IMIĘ: </b> <span id="name"></span></p>
+					<p>Data: <span id="date"></span></p>
+					<p>Godzina: <span id="time"></span></p>
 				</div>
 			</div>
 			<div class="col2">
