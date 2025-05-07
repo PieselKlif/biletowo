@@ -30,7 +30,6 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 
 						<h4>Wybierz typ biletu</h4>
 						<div id="ticket-type"></div>
-						<!-- TODO FIX zajęte miejsca po zmienie daty -->
 
 						<h4>Wybierz miejsca</h4>
 

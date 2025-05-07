@@ -271,6 +271,7 @@ fetch(`/api/event/${eid}/time`)
 			const selectedEvent = data.find(event => event.event_date === selectedDate);
 
 			updateTime(selectedEvent);
+			updateSeats(document.getElementById("event-row").value);
 		});
 	})
 	.catch(error => {
