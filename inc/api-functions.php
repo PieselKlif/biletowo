@@ -172,11 +172,14 @@ function api_post_get_table_data($data) {
 	}
 
 	foreach($data['tickets'] as $row){
-		$res = DB::query("SELECT display_name, price FROM ticket_prices WHERE id = :id", ["id" => $row['id']]);
-
-		if (!empty($res)){
-			$json['sum'] += (float)$res[0]['price'] * $row['quantity'];
-			$json['tickets'][] = $res[0];
+		if ($row['quantity'] != 0){
+			$res = DB::query("SELECT display_name, price FROM ticket_prices WHERE id = :id", ["id" => $row['id']]);
+	
+			if (!empty($res)){
+				$json['sum'] += (float)$res[0]['price'] * $row['quantity'];
+				$fjs = array("name" => $res[0]["display_name"], "price" => $res[0]["price"], "quantity" => $row['quantity']);
+				$json['tickets'][] = $fjs;
+			}
 		}
 	}
 
