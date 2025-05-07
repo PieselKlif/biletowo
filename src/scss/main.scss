@@ -361,8 +361,8 @@ main {
 						cursor: pointer;
 						transition: 0.3s;
 						border: 2px solid transparent;
-						background: #66a75a;
-						color: white;
+						background: $seat-color;
+						color: $text-50;
 
 						&:hover:not(.occupied):not(.selected-normal):not(.selected-discount) {
 							border: 2px solid $secondary-200;
@@ -370,8 +370,7 @@ main {
 					}
 
 					.occupied {
-						background: #777453;
-						color: white;
+						background: $seat-occupied;
 						cursor: not-allowed;
 					}
 				}
@@ -390,6 +389,69 @@ main {
 						font-size: 1.1rem;
 						margin-right: 10px;
 						margin-bottom: 15px;
+					}
+				}
+
+				.summary_panel {
+					#summaryTable {
+						width: 100%;
+						border-radius: 10px;
+						border-collapse: collapse;
+						background-color: $table-row-1;
+						margin-bottom: 15px;
+						
+						tr {
+							td {
+								padding: 10px 20px;
+								
+								&:first-child {
+									padding-left: 15px;
+								}
+
+								&:nth-child(2) {
+									text-align: center;
+								}
+
+								&:last-child {
+									text-align: right;
+								}
+							}
+
+							&:nth-child(2n) {
+								background-color: $table-row-2;
+							}
+
+							&:last-child {
+								td {
+									border-top: 1px solid black;
+
+									&:first-child {
+										border-bottom-left-radius: 10px;
+									}
+
+									&:last-child {
+										border-bottom-right-radius: 10px;
+									}
+								}
+							}
+						}
+					}
+
+					p {
+						margin: 5px 0;
+						font-size: 1.15rem;
+
+						span {
+							font-weight: bold;
+						}
+					}
+
+					p:nth-child(3) {
+						font-size: 1.4rem;
+
+						span {
+							color: $text-600;
+						}
 					}
 				}
 			}

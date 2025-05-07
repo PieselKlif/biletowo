@@ -50,10 +50,31 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 				</div>
 				<div class="summary_panel">
 					<h2 class="he">3. Podsumowanie</h2>
-					<table id="summaryTable"></table>
-					<p><b>IMIĘ</b> <span id="name"></span></p>
-					<p>Data: <span id="date"></span></p>
-					<p>Godzina: <span id="time"></span></p>
+					<table id="summaryTable">
+						<tr>
+							<td>Sektor <b>A</b>, Rząd <b>3</b>, Miejsce <b>14</b></td>
+							<td><b>Normalny</b></td>
+							<td><b>104,95 zł</b></td>
+						</tr>
+						<tr>
+							<td>Sektor <b>A</b>, Rząd <b>3</b>, Miejsce <b>15</b></td>
+							<td><b>Normalny</b></td>
+							<td><b>104,95 zł</b></td>
+						</tr>
+						<tr>
+							<td><b>Płyta - Ulgowy</b></td>
+							<td><b>x1</b></td>
+							<td><b>226,45 zł</b></td>
+						</tr>
+						<tr>
+							<td><b>Suma</b></td>
+							<td></td>
+							<td><b>436,35 zł</b></td>
+						</tr>
+					</table>
+					<p><b>IMIĘ: </b> <span id="name">Andrzej Kowalski</span></p>
+					<p>Data: <span id="date">20.06.2024</span></p>
+					<p>Godzina: <span id="time">20:00</span></p>
 				</div>
 			</div>
 			<div class="col2">
