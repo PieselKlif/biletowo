@@ -71,6 +71,10 @@ route('/wydarzenia/:slug/buy', function ($slug) {
   get_buy_page($slug);
 });
 
+route('/buy/final', function () {
+  get_final_page();
+});
+
 // ---- END PAGE ROUTE ----
 
 // ---- START API ----

@@ -214,3 +214,8 @@ function get_buy_page($slug) {
 		is404();
 	}
 }
+
+function get_final_page() {
+	require VIEWS_DIR . "final.php";
+	final_page();
+}
