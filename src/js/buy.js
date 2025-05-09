@@ -3,9 +3,11 @@ const eventTime = document.getElementById("event-time");
 const summaryTable = document.getElementById("summary-table");
 const fname = document.getElementById("fname");
 const lname = document.getElementById("lname");
+const email = document.getElementById("email");
 const name = document.getElementById("name");
 const date = document.getElementById("date");
 const time = document.getElementById("time");
+const submit = document.getElementById("submit");
 
 const ticket = {
 	'time' : 0,
@@ -382,3 +384,29 @@ fname.addEventListener("input", (e) => {
 lname.addEventListener("input", (e) => {
 	name.innerText = `${fname.value} ${e.target.value}`;
 })
+
+submit.addEventListener("click", () => {
+	ticket.email = email.value;
+	ticket.fname = fname.value;
+	ticket.lname = lname.value;
+	ticket.eid = eid;
+
+	fetch(`/api/buy/ticket`, {
+		method: 'POST',
+		headers: {
+			'Content_Type': 'application/json'
+		},
+		body: JSON.stringify(ticket)
+	})
+		.then(res => res.json())
+		.then(data => {
+			if (data.success == true) {
+				window.location.href = "/buy/final";
+			} else {
+				document.getElementById("info").innerText = data.message;
+			}
+		})
+		.catch(error => {
+			console.error('Błąd:', error.message);
+		})
+});
