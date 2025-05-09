@@ -186,26 +186,28 @@ function updateSeats(rowid) {
 
 				document.getElementById("seat-selector").appendChild(button);
 
-				button.addEventListener("click", (e) => {
-					if (e.target.classList.contains("selected")){
-						e.target.classList.remove("selected");
-						e.target.style = "";
+				if (element.aviable == true){
+					button.addEventListener("click", (e) => {
+						if (e.target.classList.contains("selected")){
+							e.target.classList.remove("selected");
+							e.target.style = "";
 
-						ticket.seats = ticket.seats.filter(seat => seat.id !== element.id);
-					} else {
-						e.target.classList.add("selected");
-						e.target.style = `background: ${price[selectedPrice].color_hex};`;
+							ticket.seats = ticket.seats.filter(seat => seat.id !== element.id);
+						} else {
+							e.target.classList.add("selected");
+							e.target.style = `background: ${price[selectedPrice].color_hex};`;
 
-						const seat = {
-							'id': element.id,
-							'type': price[selectedPrice].id
-						};
+							const seat = {
+								'id': element.id,
+								'type': price[selectedPrice].id
+							};
 
-						ticket.seats.push(seat);
-					}
+							ticket.seats.push(seat);
+						}
 
-					updateTable();
-				});
+						updateTable();
+					});
+				}
 			});
 		})
 		.catch(error => {
