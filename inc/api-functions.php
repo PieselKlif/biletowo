@@ -192,3 +192,53 @@ function api_post_get_table_data($data) {
 	header('Content-Type: application/json');
 	echo json_encode($json);
 }
+
+function api_post_buy_ticket($data) {
+	$json = $data;
+	header('Content-Type: application/json');
+
+	$res = DB::query("SELECT id FROM events WHERE id = :i", ["i" => $data['eid']]);
+
+	if (empty($res)) {
+		$json = array("success" => false, "message" => "Wydarzenie nie istnieje");
+		echo json_encode($json);
+		return;
+	}
+
+	$res = DB::query("SELECT id FROM event_dates WHERE id = :di AND event_id = :ei", ["di" => $data['time'], "ei" => $data['eid']]);
+
+	if (empty($res)) {
+		$json = array("success" => false, "message" => "Godzina nie istnieje");
+		echo json_encode($json);
+		return;
+	}
+
+	foreach ($data['seats'] as $row){
+		$res = DB::query("SELECT ts.id FROM ticket_seats ts JOIN tickets t ON ts.ticket_id = t.id WHERE ts.seat_id = :sid AND t.event_id = :eid AND t.date_id = :did;", ["sid" => $row['id'], "eid" => $data['eid'], "did" => $data['time']]);
+		
+		if (!empty($res)) {
+			$json = array("success" => false, "message" => "Jedno z miejsc jest zajęte");
+			echo json_encode($json);
+			return;
+		}
+	}
+	
+	// TODO nie sprawdza poprawności czy ticket_price istnieje i jest poprawny
+
+	$ticket_number = "TICKET_" . base_convert(sha1(time() . $data['fname'] . $data['lname'] . $data['email']), 10, 36);
+
+	$ticket_id = DB::insert("INSERT INTO tickets (ticket_number, email, first_name, last_name, event_id, date_id) VALUES (:ticketNum, :email, :fname, :lname, :eid, :tid)", ["ticketNum" => $ticket_number, "email" => $data['email'], "fname" => $data['fname'], "lname" => $data['lname'], "eid" => $data['eid'], "tid" => $data['time']]);
+
+	foreach ($data['tickets'] as $row) {
+		if ($row['quantity'] != 0) {
+			DB::query("INSERT INTO ticket (ticket_price_id, ticket_id, quantity) VALUES (:tpi, :ti, :q)", ["tpi" => $row['id'], "ti" => $ticket_id, "q" => $row['quantity']]);
+		}
+	}
+
+	foreach ($data['seats'] as $row) {
+		DB::query("INSERT INTO ticket_seats (seat_id, ticket_id, ticket_price_id) VALUES (:si, :ti, :tpi)", ["si" => $row['id'], "ti" => $ticket_id, "tpi" => $row['type']]);
+	}
+
+	$json = array("success" => true);
+	echo json_encode($json);
+}
