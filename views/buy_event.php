@@ -61,6 +61,8 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 					<p>Data: <span id="date"></span></p>
 					<p>Godzina: <span id="time"></span></p>
 				</div>
+				<button id="submit">Zamawiam</button>
+				<p id="info"></p>
 			</div>
 			<div class="col2">
 				<div>

@@ -458,6 +458,18 @@ main {
 						}
 					}
 				}
+
+				#submit {
+					width: fit-content;
+					align-self: flex-end;
+					padding: 7px 60px;
+					background-color: $primary;
+					border: none;
+					border-radius: 10px;
+					cursor: pointer;
+					font-size: 1.05rem;
+					margin-top: 10px;
+				}
 			}
 
 			.col2 {
