@@ -1,6 +1,11 @@
 <?php
 if (!defined("ABSPATH")) die("Brak dostępu");
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
+
 function get_header() {
 	require VIEWS_DIR . "/header.php";
 }
@@ -220,8 +225,8 @@ function get_final_page() {
 	final_page();
 }
 
-function send_email($data) {
-	$res = DB::query("SELECT events.name AS event_name, venues.name AS venue_name, venues.city AS venue_city FROM events INNER JOIN venues ON events.venue_id = venues.id WHERE events.id = :eid;", ["eid" => $data['eid']])[0];
+function send_email($data, $ticketID) {
+	$res = DB::query("SELECT events.event_time_info, events.name AS event_name, venues.name AS venue_name, venues.city AS venue_city, artists.name AS artist_name FROM events INNER JOIN venues ON events.venue_id = venues.id INNER JOIN artists ON events.artist_id = artists.id WHERE events.id = :eid;", ["eid" => $data['eid']])[0];
 	$tres = DB::query("SELECT event_date, event_time FROM event_dates WHERE id = :i", ["i" => $data['time']])[0];
 
 	$timePart = explode(":", $tres['event_time']);
@@ -244,7 +249,7 @@ function send_email($data) {
 			$color = !$color;
 		}
 
-		$table .= '<td>Sektor <strong>'.$row['sector'].'</strong>, Rząd <strong>'.$row['row'].'</strong>, Siedzenie <strong>'.$row['seat'].'</strong></td>
+		$table .= '<td>Sektor <strong>'.$row['sector'].'</strong>, Rząd <strong>'.$row['row'].'</strong>, Miejsce <strong>'.$row['seat'].'</strong></td>
 							<td style="text-align: center;"><strong>'.$row['type'].'</strong></td>
 							<td style="text-align: right;"><strong>'.$row['price'].' zł</strong></td></tr>';
 	}
@@ -331,15 +336,182 @@ function send_email($data) {
 	</html>
 	HTML;
 
+	$qr = new QrCode($ticketID);
+	$writer = new PngWriter();
+	$result = $writer->write($qr);
+	$qrBase64 = base64_encode($result->getString());
+	$qrHtml = '<img class="qr" src="data:image/png;base64,' . $qrBase64 . '" width="150" alt="Kod QR" />';
+
+	$table = "";
+
+	foreach($table_data['seats'] as $row) {
+		$table .= '<tr>
+					<td>Sektor <strong>'.$row['sector'].'</strong>, Rząd <strong>'.$row['row'].'</strong>, Miejsce <strong>'.$row['seat'].'</strong></td>
+					<td><strong>'.$row['type'].'</strong></td></tr>';
+	}
+
+	foreach($table_data['tickets'] as $row) {
+		$table .= '<tr>
+					<td><strong>'.$row['name'].'</strong></td>
+					<td><strong>'.$row['quantity'].'x</strong></td></tr>';
+	}
+
+	$pdf = <<<HTML
+	<!DOCTYPE html>
+	<html lang="pl">
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: Arial, Helvetica, sans-serif;
+				margin: 16px;
+			}
+
+			.head {
+				display: grid;
+				grid-template-columns: 35vw auto;
+				margin-bottom: 10px;
+			}
+
+			.qr {
+				width: 30vw;
+			}
+
+			.che {
+				color: #7a7252;
+				font-weight: bold;
+			}
+
+			td>span {
+				margin-left: 10px;
+			}
+
+			footer {
+				margin-top: 40px;
+			}
+
+			footer>strong {
+				margin-top: 15px;
+				display: block;
+			}
+
+			h1 {
+				font-size: 2.4rem;
+			}
+
+			h2 {
+				color: #7a7252;
+				font-style: italic;
+			}
+
+			h3 {
+				margin-top: 10px;
+				font-weight: normal;
+				font-size: 1.3rem;
+			}
+			
+			h4 {
+				font-weight: normal;
+				font-size: 0.95rem;
+			}
+
+			h5 {
+				font-weight: normal;
+				margin-top: 15px;
+				line-height: 1.25rem;
+			}
+
+			.table {
+				margin-top: 25px;
+			}
+
+			.table>table {
+				margin-top: 5px;
+				width: 100%;
+				background-color: #d9d9d9;
+				border-collapse: collapse;
+			}
+
+			tr>td:last-child {
+				float: right;
+			}
+
+			.table td {
+				padding: 8px 10px;
+			}
+
+			.table>table tr:nth-child(2n) {
+				background-color: #cdcdcd;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="head">
+			{$qrHtml}
+			<div>
+				<h1>{$res['event_name']}</h1>
+				<h2>{$res['artist_name']}</h2>
+				<h3>{$date}, godz. {$time}</h3>
+				<h4>{$res['venue_name']}, {$res['venue_city']}</h4>
+				<h5>{$res['event_time_info']}</h5>
+			</div>
+		</div>
+		<table>
+			<tr>
+				<td>
+					<strong>BILET NR</strong>
+				</td>
+				<td>
+					<span class="che">{$ticketID}</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong>IMIĘ</strong>
+				</td>
+				<td>
+					<span class="che">{$data['fname']} {$data['lname']}</span>
+				</td>
+			</tr>
+		</table>
+
+		<div class="table">
+			<strong>MIEJSCA</strong>
+			<table>
+				{$table}
+			</table>
+		</div>
+
+		<footer>
+			<p>Bilet należy przedstawić na bramie wejściowej. Bilet przedstawia osoba, na którą jest bilet przypisany. W przypadku biletów <strong>z ulgą</strong> osoba z takim biletem ma obowiązek przedstawienia dokumentu upoważniającego ją do takiego biletu.</p>
+			<strong>UWAGA!</strong>
+			<p>Pracownik może poprosić o przedstawienie biletu jeszcze raz na wejściu na <strong>sektor</strong>.</p>
+			<p style="margin-top: 10px;">
+				<img src="http://{$_SERVER['HTTP_HOST']}/media/Logo.svg" alt="BILETOWO" width="45" style="vertical-align: middle; margin-right: 5px;">
+				<span style="font-weight: bold; color: #000;">BILETOWO</span>
+			</p>
+		</footer>
+	</body>
+	</html>
+	HTML;
+
+	echo $pdf;
+
 	$email = $data['email'];
 	$subject = "Twój bilet na {$res['event_name']}";
 	$headers = "MIME-Version: 1.0\r\n".
 						"From: Biletowo <no-reply@biletowo.pl>\r\n" .
       	 	  "Content-Type: text/html; charset=UTF-8\r\n";
 
-	$send = mail($email, $subject, $html, $headers);
+	// $send = mail($email, $subject, $html, $headers);
 
-	if (!$send){
-		echo "Błąd podczas wysyłania";
-	}
+	// if (!$send){
+	// 	echo "Błąd podczas wysyłania";
+	// }
 }

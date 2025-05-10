@@ -239,7 +239,7 @@ function api_post_buy_ticket($data) {
 		DB::query("INSERT INTO ticket_seats (seat_id, ticket_id, ticket_price_id) VALUES (:si, :ti, :tpi)", ["si" => $row['id'], "ti" => $ticket_id, "tpi" => $row['type']]);
 	}
 
-	send_email($data);
+	send_email($data, $ticket_number);
 
 	$json = array("success" => true);
 	echo json_encode($json);
