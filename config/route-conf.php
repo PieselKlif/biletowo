@@ -117,12 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode($json, true);
     api_post_buy_ticket($data);
   });
-
-  route('/api/test', function () {
-    $json = file_get_contents('php://input');
-    $data = json_decode($json, true);
-    send_email($data, "TICKET_136lnbcw28i884w8k");
-  });
 }
 
 // ---- END API ----
