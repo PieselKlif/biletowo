@@ -340,7 +340,7 @@ function send_email($data, $ticketID) {
 	$writer = new PngWriter();
 	$result = $writer->write($qr);
 	$qrBase64 = base64_encode($result->getString());
-	$qrHtml = '<img class="qr" src="data:image/png;base64,' . $qrBase64 . '" width="150" alt="Kod QR" />';
+	$qrHtml = '<img src="data:image/png;base64,' . $qrBase64 . '" alt="Kod QR" />';
 
 	$table = "";
 
@@ -369,18 +369,12 @@ function send_email($data, $ticketID) {
 			}
 
 			body {
-				font-family: Arial, Helvetica, sans-serif;
+				font-family: DejaVu Sans;
 				margin: 16px;
 			}
 
-			.head {
-				display: grid;
-				grid-template-columns: 35vw auto;
-				margin-bottom: 10px;
-			}
-
-			.qr {
-				width: 30vw;
+			.info {
+				margin-top: 10px;
 			}
 
 			.che {
@@ -452,31 +446,33 @@ function send_email($data, $ticketID) {
 		</style>
 	</head>
 	<body>
-		<div class="head">
-			{$qrHtml}
-			<div>
-				<h1>{$res['event_name']}</h1>
-				<h2>{$res['artist_name']}</h2>
-				<h3>{$date}, godz. {$time}</h3>
-				<h4>{$res['venue_name']}, {$res['venue_city']}</h4>
-				<h5>{$res['event_time_info']}</h5>
-			</div>
-		</div>
-		<table>
+		<table style="width: 100%; margin-bottom: 10px;">
 			<tr>
+				<td>{$qrHtml}</td>
 				<td>
-					<strong>BILET NR</strong>
-				</td>
-				<td>
-					<span class="che">{$ticketID}</span>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>IMIĘ</strong>
-				</td>
-				<td>
-					<span class="che">{$data['fname']} {$data['lname']}</span>
+					<h1>{$res['event_name']}</h1>
+					<h2>{$res['artist_name']}</h2>
+					<h3>{$date}, godz. {$time}</h3>
+					<h4>{$res['venue_name']}, {$res['venue_city']}</h4>
+					<h5>{$res['event_time_info']}</h5>
+					<table class="info">
+						<tr>
+							<td>
+								<strong>BILET NR</strong>
+							</td>
+							<td>
+								<span class="che">{$ticketID}</span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>IMIĘ</strong>
+							</td>
+							<td>
+								<span class="che">{$data['fname']} {$data['lname']}</span>
+							</td>
+						</tr>
+					</table>
 				</td>
 			</tr>
 		</table>
@@ -492,26 +488,45 @@ function send_email($data, $ticketID) {
 			<p>Bilet należy przedstawić na bramie wejściowej. Bilet przedstawia osoba, na którą jest bilet przypisany. W przypadku biletów <strong>z ulgą</strong> osoba z takim biletem ma obowiązek przedstawienia dokumentu upoważniającego ją do takiego biletu.</p>
 			<strong>UWAGA!</strong>
 			<p>Pracownik może poprosić o przedstawienie biletu jeszcze raz na wejściu na <strong>sektor</strong>.</p>
-			<p style="margin-top: 10px;">
-				<img src="http://{$_SERVER['HTTP_HOST']}/media/Logo.svg" alt="BILETOWO" width="45" style="vertical-align: middle; margin-right: 5px;">
-				<span style="font-weight: bold; color: #000;">BILETOWO</span>
-			</p>
 		</footer>
 	</body>
 	</html>
 	HTML;
 
-	echo $pdf;
+	$options = new Options();
+	$options->set('defaultFont', 'DejaVu Sans');
+
+	$dompdf = new Dompdf($options);
+	$dompdf->loadHtml($pdf);
+	$dompdf->setPaper('A4', 'portrait');
+	$dompdf->render();
+	$pdfContent = $dompdf->output();
+
+	$boundary = md5(time());
 
 	$email = $data['email'];
 	$subject = "Twój bilet na {$res['event_name']}";
-	$headers = "MIME-Version: 1.0\r\n".
-						"From: Biletowo <no-reply@biletowo.pl>\r\n" .
-      	 	  "Content-Type: text/html; charset=UTF-8\r\n";
+	$headers = "MIME-Version: 1.0\r\n";
+	$headers .= "From: Biletowo <no-reply@biletowo.pl>\r\n";
+	$headers .= "Content-Type: multipart/mixed; boundary=\"{$boundary}\"\r\n";
 
-	// $send = mail($email, $subject, $html, $headers);
+	$message = "--{$boundary}\r\n";
+	$message .= "Content-Type: text/html; charset=UTF-8\r\n";
+	$message .= "Content-Transfer-Encoding: 8bit\r\n\r\n";
+	$message .= $html . "\r\n";
 
-	// if (!$send){
-	// 	echo "Błąd podczas wysyłania";
-	// }
+	$pdfEncoded = chunk_split(base64_encode($pdfContent));
+	$message .= "--$boundary\r\n";
+	$message .= "Content-Type: application/pdf; name=\"bilet.pdf\"\r\n";
+	$message .= "Content-Transfer-Encoding: base64\r\n";
+	$message .= "Content-Disposition: attachment; filename=\"bilet.pdf\"\r\n";
+	$message .= "\r\n";
+	$message .= $pdfEncoded . "\r\n";
+	$message .= "--$boundary--";
+
+	$send = mail($email, $subject, $message, $headers);
+
+	if (!$send){
+		echo "Błąd podczas wysyłania";
+	}
 }
