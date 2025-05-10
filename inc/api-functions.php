@@ -190,7 +190,7 @@ function api_post_get_table_data($data) {
 	$json['sum'] = number_format($json['sum'], 2, '.', '');
 
 	header('Content-Type: application/json');
-	echo json_encode($json);
+	return json_encode($json);
 }
 
 function api_post_buy_ticket($data) {
@@ -238,6 +238,8 @@ function api_post_buy_ticket($data) {
 	foreach ($data['seats'] as $row) {
 		DB::query("INSERT INTO ticket_seats (seat_id, ticket_id, ticket_price_id) VALUES (:si, :ti, :tpi)", ["si" => $row['id'], "ti" => $ticket_id, "tpi" => $row['type']]);
 	}
+
+	send_email($data);
 
 	$json = array("success" => true);
 	echo json_encode($json);

@@ -219,3 +219,127 @@ function get_final_page() {
 	require VIEWS_DIR . "final.php";
 	final_page();
 }
+
+function send_email($data) {
+	$res = DB::query("SELECT events.name AS event_name, venues.name AS venue_name, venues.city AS venue_city FROM events INNER JOIN venues ON events.venue_id = venues.id WHERE events.id = :eid;", ["eid" => $data['eid']])[0];
+	$tres = DB::query("SELECT event_date, event_time FROM event_dates WHERE id = :i", ["i" => $data['time']])[0];
+
+	$timePart = explode(":", $tres['event_time']);
+	$time = $timePart[0].":".$timePart[1];
+
+	$datePart = explode("-", $tres['event_date']);
+	$date = $datePart[2].".".$datePart[1].".".$datePart[0];
+
+	$table_data = json_decode(api_post_get_table_data($data), true);
+
+	$color = true;
+	$table = "";
+
+	foreach ($table_data['seats'] as $row) {
+		if ($color) {
+			$table .= '<tr style="background-color: #d9d9d9;">';
+			$color = !$color;
+		} else {
+			$table .= '<tr style="background-color: #cdcdcd;">';
+			$color = !$color;
+		}
+
+		$table .= '<td>Sektor <strong>'.$row['sector'].'</strong>, Rząd <strong>'.$row['row'].'</strong>, Siedzenie <strong>'.$row['seat'].'</strong></td>
+							<td style="text-align: center;"><strong>'.$row['type'].'</strong></td>
+							<td style="text-align: right;"><strong>'.$row['price'].' zł</strong></td></tr>';
+	}
+
+	foreach ($table_data['tickets'] as $row) {
+		if ($color) {
+			$table .= '<tr style="background-color: #d9d9d9;">';
+			$color = !$color;
+		} else {
+			$table .= '<tr style="background-color: #cdcdcd;">';
+			$color = !$color;
+		}
+
+		$table .= '<td><strong>'.$row['name'].'</strong></td>
+							<td style="text-align: center;"><strong>'.$row['quantity'].'x '.$row['price'].' zł</strong></td>
+							<td style="text-align: right;"><strong>'.$row['sum'].' zł</strong></td></tr>';
+	}
+
+	if ($color) {
+		$table .= '<tr style="background-color: #d9d9d9; border-top: 2px solid black;">';
+		$color = !$color;
+	} else {
+		$table .= '<tr style="background-color: #cdcdcd; border-top: 2px solid black;">';
+		$color = !$color;
+	}
+
+	$table .= '<tr style="background-color: #cdcdcd; border-top: 2px solid black;">
+							<td colspan="2"><strong>Suma</strong></td>
+							<td style="text-align: right;"><strong>'.$table_data['sum'].' zł</strong></td>
+						</tr>';
+
+	$html = <<<HTML
+	<!DOCTYPE html>
+	<html lang="pl">
+	<head>
+		<meta charset="UTF-8">
+		<title>Bilet – {$res['event_name']}</title>
+	</head>
+	<body style="font-family: Arial, sans-serif; color: #000; background-color: #ffffff; padding: 20px; margin: 0;">
+		<table width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width: 600px; margin: auto;">
+			<tr>
+				<td style="padding-bottom: 20px;">
+					<p style="font-size: 20px; margin-bottom: 5px;">Cześć <strong>{$data['fname']} {$data['lname']}</strong>!</p>
+					<p style="font-size: 16px;">Oto twój bilet na <strong>{$res['event_name']}</strong></p>
+				</td>
+			</tr>
+			<tr>
+				<td style="font-size: 14px; padding-bottom: 15px;">
+					<p>📅 Data: <strong>{$date}</strong></p>
+					<p>⏰ Godzina: <strong>{$time}</strong></p>
+					<p>📌 Miejsce: <strong>{$res['venue_name']}, {$res['venue_city']}</strong></p>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-bottom: 10px; font-size: 14px;">
+					<p><strong>Podsumowanie Twojego zakupu:</strong></p>
+					<table width="100%" border="0" cellpadding="8" cellspacing="0" style="border-collapse: collapse; font-size: 14px;">
+						{$table}
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding: 30px 0; font-size: 20px; text-align: center;">
+					<p>Do zobaczenia!</p>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align: center; padding: 20px; border: 1px solid #000; border-radius: 12px; font-size: 18px;">
+					<p>Zapisz załączony <strong>plik PDF z biletem</strong><br>
+					na urządzeniu mobilnym lub go wydrukuj.</p>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align: center; font-size: 12px; color: #7a7252; padding-top: 30px;">
+					<p>Jeśli masz pytania, skontaktuj się z nami: <a href="mailto:kontakt@biletowo.pl" style="color: #7a7252;">kontakt@biletowo.pl</a></p>
+					<p style="margin-top: 10px;">
+						<img src="http://{$_SERVER['HTTP_HOST']}/media/Logo.svg" alt="BILETOWO" width="34" style="vertical-align: middle; margin-right: 5px;">
+						<span style="font-weight: bold; color: #000;">BILETOWO</span>
+					</p>
+				</td>
+			</tr>
+		</table>
+	</body>
+	</html>
+	HTML;
+
+	$email = $data['email'];
+	$subject = "Twój bilet na {$res['event_name']}";
+	$headers = "MIME-Version: 1.0\r\n".
+						"From: Biletowo <no-reply@biletowo.pl>\r\n" .
+      	 	  "Content-Type: text/html; charset=UTF-8\r\n";
+
+	$send = mail($email, $subject, $html, $headers);
+
+	if (!$send){
+		echo "Błąd podczas wysyłania";
+	}
+}
