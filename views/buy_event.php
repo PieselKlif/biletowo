@@ -79,7 +79,6 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 		</div>
 		<script>
 			eid = <?= $erow['id'] ?>;
-			vid = <?= $vrow['id'] ?>;
 		</script>
 		<script src="/src/js/buy.js"></script>
 	</main>

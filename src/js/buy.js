@@ -349,7 +349,7 @@ fetch(`/api/event/${eid}/tickets`)
 		console.error('Błąd:', error.message);
 	})
 	
-fetch(`/api/venue/${vid}/sectors`)
+fetch(`/api/event/${eid}/sectors`)
 	.then(response => {
 		if (!response.ok) {
 			return response.json().then(errorData => {

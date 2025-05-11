@@ -69,8 +69,8 @@ function api_get_event_tickets($id){
 	}
 }
 
-function api_get_venue_sectors($id) {
-	$res = DB::query("SELECT id, name FROM sectors WHERE venue_id = :i", ["i" => $id]);
+function api_get_event_sectors($id) {
+	$res = DB::query("SELECT DISTINCT sectors.id, sectors.name FROM ticket_prices INNER JOIN sectors ON ticket_prices.sector_id = sectors.id WHERE ticket_prices.event_id = :i;", ["i" => $id]);
 
 	if (!empty($res)) {
 		$json = [];
@@ -87,7 +87,7 @@ function api_get_venue_sectors($id) {
 		http_response_code(404);
 		header('Content-Type: application/json');
 		echo json_encode([
-			'error' => 'Venue not found'
+			'error' => 'Event not found'
 		]);
 	}
 }
