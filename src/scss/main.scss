@@ -68,6 +68,15 @@ main {
 		gap: 20px;
 	}
 
+	.event, .artist, .venues {
+		animation: fadeIn 0.5s ease-out;
+		animation-iteration-count: 1;
+		animation-fill-mode: forwards;
+		animation-delay: 0.5s;
+
+		opacity: 0;
+	}
+
 	.venues {
 		width: fit-content;
 		width: 250px;
@@ -688,5 +697,19 @@ footer {
 	hr {
 		border-top: 1px solid $secondary-200;
 		margin: 70px 0 20px;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		margin-top: 20px;
+		filter: blur(2px);
+	}
+
+	to {
+		opacity: 1;
+		margin-top: 0;
+		filter: blur(0);
 	}
 }
