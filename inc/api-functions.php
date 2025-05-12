@@ -197,6 +197,18 @@ function api_post_buy_ticket($data) {
 	$json = $data;
 	header('Content-Type: application/json');
 
+	if ($data['fname'] == "" || $data['lname'] == "" || $data['email'] == "") {
+		$json = array("success" => false, "message" => "Nie wypełniono informacji");
+		echo json_encode($json);
+		return;
+	}
+
+	if (empty($data['seats']) || empty($data['tickets'])) {
+		$json = array("success" => false, "message" => "Nie wybrano biletów");
+		echo json_encode($json);
+		return;
+	}
+
 	$res = DB::query("SELECT id FROM events WHERE id = :i", ["i" => $data['eid']]);
 
 	if (empty($res)) {

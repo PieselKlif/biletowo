@@ -43,10 +43,10 @@ function get_buy_site($erow, $vrow, $arow, $date) {
 				<div class="ticket_details">
 					<h2 class="he">2. Dane do biletów</h2>
 					<p>Bilety zostaną wysłane na podany adres. <b>Upewnij się, że e-mail jest poprawny</b></p>
-					<input type="email" name="email" id="email" placeholder="Adres e-mail">
+					<input type="email" name="email" id="email" placeholder="Adres e-mail" require>
 					<p>Podaj prawdziwe dane. Mogą one być zweryfikowane podczas ukazywania biletu.</p>
-					<input type="text" name="fname" id="fname" placeholder="Imię">
-					<input type="text" name="lname" id="lname" placeholder="Nazwisko">
+					<input type="text" name="fname" id="fname" placeholder="Imię" require>
+					<input type="text" name="lname" id="lname" placeholder="Nazwisko" require>
 				</div>
 				<div class="summary_panel">
 					<h2 class="he">3. Podsumowanie</h2>
