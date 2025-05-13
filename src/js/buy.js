@@ -116,6 +116,7 @@ eventTime.addEventListener("change", (e) => {
 	ticket.seats = [];	
 	updateSeats(eventRow.value);
 	time.innerText = selectedDate.event_times.find(event => event.id === parseInt(eventTime.value)).time;
+	updateTable();
 });
 
 function updateTickets(sectorid) {
