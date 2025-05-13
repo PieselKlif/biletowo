@@ -1,5 +1,4 @@
 .vscode
 temp
-media/upload/*
 composer.phar
 /vendor/
