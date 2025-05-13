@@ -1,6 +1,10 @@
 const eventDate = document.getElementById("event-date");
 const eventTime = document.getElementById("event-time");
+const eventRow = document.getElementById("event-row");
+const eventSector = document.getElementById("event-sector");
+const ticketType = document.getElementById("ticket-type");
 const summaryTable = document.getElementById("summary-table");
+const seatSelector = document.getElementById("seat-selector");
 const fname = document.getElementById("fname");
 const lname = document.getElementById("lname");
 const email = document.getElementById("email");
@@ -87,7 +91,7 @@ function updateTable() {
 }
 
 function updateTime(selectedEvent) {
-	const dateParts = document.getElementById("event-date").value.split("-");
+	const dateParts = eventDate.value.split("-");
 	date.innerText = `${dateParts[2]}.${dateParts[1]}.${dateParts[0]}`;
 
 	selectedDate = selectedEvent;
@@ -110,7 +114,7 @@ function updateTime(selectedEvent) {
 eventTime.addEventListener("change", (e) => {
 	ticket.time = parseInt(e.target.value);
 	ticket.seats = [];	
-	updateSeats(document.getElementById("event-row").value);
+	updateSeats(eventRow.value);
 	time.innerText = selectedDate.event_times.find(event => event.id === parseInt(eventTime.value)).time;
 });
 
@@ -125,7 +129,7 @@ function updateTickets(sectorid) {
 			return response.json();
 		})
 		.then(data => {
-			document.getElementById("ticket-type").innerHTML = "";
+			ticketType.innerHTML = "";
 			price = data;
 			selectedPrice = 0;
 
@@ -137,7 +141,7 @@ function updateTickets(sectorid) {
 				}
 
 				button.innerHTML = `${element.name}<br>${element.price} zł`;
-				document.getElementById("ticket-type").appendChild(button);
+				ticketType.appendChild(button);
 
 				button.addEventListener("click", (e) => {
 					document.querySelector(".selected-ticket").classList.remove("selected-ticket");
@@ -163,7 +167,7 @@ function updateSeats(rowid) {
 			return response.json();
 		})
 		.then(data => {
-			document.getElementById("seat-selector").innerHTML = "";
+			seatSelector.innerHTML = "";
 
 			data.forEach(element => {
 				const button = document.createElement("button");
@@ -184,7 +188,7 @@ function updateSeats(rowid) {
 					button.classList.add("selected");
 				}
 
-				document.getElementById("seat-selector").appendChild(button);
+				seatSelector.appendChild(button);
 
 				if (element.aviable == true){
 					button.addEventListener("click", (e) => {
@@ -226,19 +230,19 @@ function updateRows(sectorid) {
 			return response.json();
 		})
 		.then(data => {
-			document.getElementById("event-row").innerHTML = "";
+			eventRow.innerHTML = "";
 
 			data.forEach(element => {
 				const option = document.createElement("option");
 				option.innerText = element.name;
 				option.value = element.id;
 
-				document.getElementById("event-row").appendChild(option);
+				eventRow.appendChild(option);
 			});
 
-			updateSeats(document.getElementById("event-row").value);
+			updateSeats(eventRow.value);
 
-			document.getElementById("event-row").addEventListener("change", (e) => {
+			eventRow.addEventListener("change", (e) => {
 				updateSeats(e.target.value);
 			});
 		})
@@ -275,7 +279,7 @@ fetch(`/api/event/${eid}/time`)
 			const selectedEvent = data.find(event => event.event_date === selectedDate);
 
 			updateTime(selectedEvent);
-			updateSeats(document.getElementById("event-row").value);
+			updateSeats(eventRow.value);
 		});
 	})
 	.catch(error => {
@@ -363,14 +367,13 @@ fetch(`/api/event/${eid}/sectors`)
 			const option = document.createElement("option");
 			option.innerText = element.name;
 			option.value = element.id;
-			document.getElementById("event-sector").appendChild(option);
-
+			eventSector.appendChild(option);
 		});
 
-		updateRows(document.getElementById("event-sector").value);
-		updateTickets(document.getElementById("event-sector").value);
+		updateRows(eventSector.value);
+		updateTickets(eventSector.value);
 		
-		document.getElementById("event-sector").addEventListener("change", (e) => {
+		eventSector.addEventListener("change", (e) => {
 			updateRows(e.target.value);
 			updateTickets(e.target.value);
 		});
