@@ -33,6 +33,10 @@ header {
 
 main {
 	margin: 0 60px;
+	
+	@media screen and (max-width: $phone) {
+		margin: 0 15px;
+	}
 
 	section {
 		margin: 20px 0 10px;
@@ -40,21 +44,30 @@ main {
 		div {
 			display: flex;
 			justify-content: center;
+			flex-wrap: wrap;
 		}
 
 		h2 {
 			margin-bottom: 10px;
+
+			@media screen and (max-width: $phone) {
+				margin-top: 35px;
+			}
 		}
 	}
 
 	.banner {
 		display: block;
 		margin: 30px 0;
-
+		
 		img {
 			width: 100%;
 			border-radius: 40px;
 			box-shadow: rgba($color: #000000, $alpha: 0.25) 0 0 20px 5px;
+			
+			@media screen and (max-width: $phone) {
+				border-radius: 15px;
+			}
 		}
 
 		transition: 0.4s transform;
@@ -72,7 +85,6 @@ main {
 		animation: fadeIn 0.5s ease-out;
 		animation-iteration-count: 1;
 		animation-fill-mode: forwards;
-		animation-delay: 0.5s;
 
 		opacity: 0;
 	}
@@ -87,17 +99,28 @@ main {
 
 		transition: transform 0.3s ease;
 
+		@media screen and (max-width: $phone) {
+			width: 100%;
+			border-radius: 25px 25px 15px 15px;
+		}
+		
 		&:hover {
 			transform: scale(1.05);
 		}
 
 		div {
 			width: 250px;
-			height: 150px;
+			height: 200px;
 			background-repeat: no-repeat;
 			background-position: center;
 			background-size: cover;
 			border-radius: 35px 35px 0 0;
+
+			@media screen and (max-width: $phone) {
+				width: 100%;
+				height: 250px;
+				border-radius: 25px 25px 0 0;
+			}
 		}
 		
 		p {
@@ -124,8 +147,13 @@ main {
 		text-decoration: none;
 		background-color: $accent-300;
 		padding-bottom: 15px;
-
+		
 		transition: transform 0.3s ease;
+		
+		@media screen and (max-width: $phone) {
+			width: 100%;
+			border-radius: 25px 25px 15px 15px;
+		}
 
 		&:hover {
 			transform: scale(1.05);
@@ -138,6 +166,12 @@ main {
 			background-position: center;
 			background-size: cover;
 			border-radius: 35px 35px 0 0;
+			
+			@media screen and (max-width: $phone) {
+				width: 100%;
+				height: 250px;
+				border-radius: 25px 25px 0 0;
+			}
 		}
 		
 		p {
@@ -659,14 +693,33 @@ footer {
 	padding: 30px 70px;
 	border-radius: 35px;
 
+	@media screen and (max-width: $phone) {
+		margin: 50px 15px 15px;
+		padding: 30px 30px;
+		border-radius: 15px;
+	}
+
 	.content {
 		display: grid;
 		grid-template-columns: repeat(3, auto);
+
+		@media screen and (max-width: $phone) {
+			display: flex;
+			flex-direction: column;
+
+			div {
+				margin-top: 25px;
+			}
+		}
 
 		.logo {
 			display: flex;
 			align-items: center;
 			height: fit-content;
+			
+			@media screen and (max-width: $phone) {
+				align-self: center;
+			}
 
 			h1 {
 				margin-left: 10px;
@@ -697,6 +750,10 @@ footer {
 	hr {
 		border-top: 1px solid $secondary-200;
 		margin: 70px 0 20px;
+
+		@media screen and (max-width: $phone) {
+			margin: 30px 0 20px;
+		}
 	}
 }
 
