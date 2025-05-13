@@ -3,9 +3,9 @@ if (!defined("ABSPATH")) die("Brak dostępu");
 function get_buy_site($erow, $vrow, $arow, $date) {
 	?>
 	<main id="buy">
-		<h2 class="he">1. Wybór biletów</h2>
 		<div class="main">
 			<div class="col1">
+				<h2 class="he">1. Wybór biletów</h2>
 				<img src="<?= WebConf::$uploadDir . $vrow['venue_map'] ?>" alt="Plan obiektu">
 				<div class="tickets_panel">
 					<label for="event-date">Wybierz datę:</label>

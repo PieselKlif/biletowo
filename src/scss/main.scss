@@ -241,11 +241,19 @@ main {
 
 		h1 {
 			font-size: 20rem;
+
+			@media screen and (max-width: $phone) {
+				font-size: 10rem;
+			}
 		}
 
 		p {
 			font-weight: bold;
 			font-size: 2rem;
+
+			@media screen and (max-width: $phone) {
+				font-size: 1.2rem;
+			}
 		}
 	}
 
@@ -268,6 +276,11 @@ main {
 			display: grid;
 			grid-template-columns: 50vw auto;
 
+			@media screen and (max-width: $phone) {
+				display: flex;
+				flex-direction: column-reverse;
+			}
+
 			.col1 {
 				display: flex;
 				flex-direction: column;
@@ -275,6 +288,11 @@ main {
 				img {
 					width: 50vw;
 					border-radius: 10px;
+
+					@media screen and (max-width: $phone) {
+						width: 100%;
+						border-radius: 5px;
+					}
 				}
 
 				.tickets_panel {
@@ -315,9 +333,18 @@ main {
 							flex-direction: row;
 							float: right;
 
+							
+							@media screen and (max-width: $phone) {
+								margin-left: 35px;
+							}
+
 							h3 {
 								margin: 0 50px;
 								font-size: 1.3rem;
+
+								@media screen and (max-width: $phone) {
+									margin: 0;
+								}
 							}
 
 							.minus, .add {
@@ -525,11 +552,22 @@ main {
 
 			.col2 {
 				margin-left: 20px;
+				margin-top: 4rem;
+
+				@media screen and (max-width: $phone) {
+					margin-left: 0;
+					margin-bottom: 5px;
+					margin-top: 15px;
+				}
 
 				div {
 					height: fit-content;
 					background-color: $secondary-50;
 					border-radius: 25px 25px 15px 15px;
+					
+					@media screen and (max-width: $phone) {
+						border-radius: 15px 15px 5px 5px;
+					}
 					
 					display: flex;
 					flex-direction: column;
@@ -537,6 +575,10 @@ main {
 					img {
 						border-radius: 25px 25px 0 0;
 						width: 100%;
+						
+						@media screen and (max-width: $phone) {
+							border-radius: 15px 15px 0 0;
+						}
 					}
 
 					div {
