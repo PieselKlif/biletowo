@@ -203,7 +203,7 @@ function api_post_buy_ticket($data) {
 		return;
 	}
 
-	if (empty($data['seats']) || empty($data['tickets'])) {
+	if (empty($data['seats']) && empty($data['tickets'])) {
 		$json = array("success" => false, "message" => "Nie wybrano biletów");
 		echo json_encode($json);
 		return;
