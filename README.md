@@ -11,7 +11,7 @@
 
 ## 🛠️ Wymagania
 
-- PHP 8.2.12
+- PHP 8.2.12 lub serwer apache (np. XAMPP)
 - Composer
 - MySQL (np. poprzez XAMPP)
 - Serwer SMTP (lokalny np. Mercury Mail w XAMPP)
@@ -50,13 +50,15 @@
 5. **Uruchom projekt:**
 
    ```bash
-   php -S localhost:8000
+   php -S localhost:3000
    ```
 
-   Otwórz przeglądarkę i przejdź pod adres [http://localhost:8000](http://localhost:8000)
+   Otwórz przeglądarkę i przejdź pod adres [http://localhost:3000](http://localhost:3000)
+
+   Można też użyć serwera apache np. XAMPP przenosząc pliki do folderu `htdocs`.
    
 > [!IMPORTANT]
-> Serwer apache nie będzie działał z tym projektem. Jest to spowodowane budową projektu oraz jego działaniem.
+> W przypadku serwera apache pliki projektu muszą się znajdować w głównym folderze.
 
 ## 📧 Konfiguracja wysyłania maili
 

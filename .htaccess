@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Jeśli plik lub katalog istnieje – nie przepisuj
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Wyklucz foldery API i admin z przekierowania
+RewriteCond %{REQUEST_URI} !^/api/
+RewriteCond %{REQUEST_URI} !^/admin/
+
+# Wszystko inne przekieruj do index.php
+RewriteRule ^ index.php [QSA,L]
