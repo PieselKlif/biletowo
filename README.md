@@ -18,6 +18,8 @@
 
 ## 🚀 Instalacja i uruchomienie
 
+Można zamiast długiego procesu konfiguracji i pobierania pobrać gotowego zipa [tutaj](https://github.com/PieselKlif/biletowo/releases/latest) i postępować z instrukcją zawartą w wydaniu. Dla osób które się bardziej oriętują powstała ta instrukcja. Gotowy zip jest też przeznaczony dla osób bez zainstalowanego **composera**.
+
 1. **Sklonuj repozytorium:**
    ```bash
    git clone https://github.com/PieselKlif/biletowo.git
@@ -68,6 +70,8 @@ Aby wysyłka e-maili działała lokalnie, należy:
 2. Skonfigurować konto użytkownika w Mercury (login i hasło).
 3. Zalogować klienta (np. thunderbird) do użytkownika w Mercury.
 4. W systemie Windows dodać wyjątek zapory dla Mercury, jeśli e-maile nie dochodzą.
+
+[Przykładowy film konfiguracji](https://youtu.be/7dcaUUlsMOg)
 
 ## 🔐 Dane logowania
 
